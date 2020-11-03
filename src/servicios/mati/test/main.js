@@ -45,10 +45,6 @@ rutaArchivo = `src/servicios/mati/pdfs/`;
 
 async function main() {
     try {
-        console.log('Iniciando el modulo pdf...')
-        console.log('Creando PDF para Factura de cancelacion de vuelo')
-        //console.log('Creando PDF para Billete de vuelo')
-        //console.log('Creando PDF para Factura de vuelo')
         //billeteVuelo(nombreArchivo, rutaArchivo, objeto) 
         // factura(nombreArchivo, rutaArchivo, objeto) 
         facturaCancelada(nombreArchivo, rutaArchivo, objeto) 

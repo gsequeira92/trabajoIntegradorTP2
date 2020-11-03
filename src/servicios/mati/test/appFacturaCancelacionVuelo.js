@@ -7,6 +7,8 @@ const { guardarArchivo } = require("./guardarArchivo.js");
 const contenidoPdf = require("./pdfFacturaCancelacionVuelo");
 
 function facturaCancelada(nombreArchivo, rutaArchivo, objeto){
+    console.log('Iniciando el modulo pdf...')
+    console.log('Creando PDF para Factura de cancelacion de vuelo')
 const {content} = contenidoPdf.devolverContenido(objeto)
 
 let docDefinition = {
