@@ -5,8 +5,9 @@ const moment = require ('moment')
 // const flightHour = flight.getHours()
 // const flightYear = flight.getFullYear()
 //console.log(moment(flight).subtract(10, "days").calendar())
+
 //intervalo 1 vez por hora, ese intervalo trae a los vuelos que tienen que ser notificados y marcarlos como ejecutado.
-//map reduce mongoDb (Indices!)
+//map-reduce mongoDb (Indices!)
 //Queue
 //Query en db para obtener eventos en el tiempo
 
@@ -15,6 +16,8 @@ function flightNotificationsQueue() {
     this.dataStore = Array.prototype.slice.call(arguments, 0);
     this.enqueue = enqueue;
     this.dequeue = dequeue;
+    this.notify = notify;
+    this.getNearDepartureFlights = getNearDepartureFlights;
     this.empty = empty;
     this.print = print;
 
@@ -36,14 +39,24 @@ function flightNotificationsQueue() {
             console.log(item);
         });
     }
+
+    function notify(){
+
+        const nearDeparture = this.getNearDepartureFlights()
+        nearDeparture.forEach(console.log('NOTIFICACION DE VUELO'))
+    }
+
+    function getNearDepartureFlights(){
+        
+       return this.dataStore.filter(e=>moment(e.horaPartida).endOf('hours').fromNow() === 2)
+
+    }
 }
-
 function crearTemporizador() {
-
-
 
     return {
 
+        //parece que ahora podria usarse internamente para programar otras cosas
         programarEventoRecurrente({ myName, myEvent, interval }) {
 
 
@@ -66,6 +79,10 @@ function crearTemporizador() {
             }
         },
 
+        /**
+         * Cancela enventos recurrentes 
+         * @idDeEventoRecurrente {*} myEvent 
+         */
         cancelarEventoRecurrente(myEvent) {
 
             try {
@@ -74,26 +91,31 @@ function crearTemporizador() {
             } catch (error) {
                 console.log(error)
             }
-
         },
 
-        activarNotificacionesPorHora({flightQueueToNotify, notifyFunction}){
+        /**
+         * cada una hora revisa las notificaciones subscriptas
+         * y activa la function notify()
+         */
+        activarNotificacionesPorHora(){
 
-            //cada una hora intervalo
+            
             setInterval(() => {
         
-                notifyFunction(flightQueueToNotify)
+                flightNotificationsQueue.notify()
                 
             }, 100000.08);
         
         },
 
-        crearNotificacionVuelo(reserva){
 
-            flightNotificationsQueue.enqueue(reserva)
+        /**
+         * 
+         * @param {*} Reserva 
+         */
+        crearNotificacionVuelo(Reserva){
+            flightNotificationsQueue.enqueue(Reserva)
         },
-
-
     }
 }
 

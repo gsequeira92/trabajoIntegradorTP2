@@ -1,4 +1,4 @@
-const { crearTemporizador } = require('../gas/Temporizador');
+const { crearTemporizador } = require('./Temporizador');
 
 const vuelos = []
 const vuelo1 = {
@@ -33,14 +33,6 @@ function verificarVuelos(vuelos) {
     }
 
 }
-
-function notifyFlightsFunction(vuelos){
-
-    for (const vuelo of vuelos) {
-        console.log('NOTIFICACION DE VUELO PROXIMO')
-    }
-}
-
 function main() {
 
     const tempo = crearTemporizador()
