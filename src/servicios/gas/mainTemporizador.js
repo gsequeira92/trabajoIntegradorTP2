@@ -1,4 +1,4 @@
-import { crearTemporizador } from "../src/servicios/gas/Temporizador.js"
+const { crearTemporizador } = require('../gas/Temporizador');
 
 const vuelos = []
 const vuelo1 = {
@@ -6,38 +6,54 @@ const vuelo1 = {
     nombre: 'primer vuelo',
     activo: true,
     duracion: 10,
+    fecha: Date('December 25, 2020 22:15:30'),
 }
 const vuelo2 = {
     id: 1543,
     nombre: 'segundo vuelo',
-    activo: true,
+    activo: false,
     duracion: 3,
+    fecha: Date('June 10, 2020 10:15:30'),
 }
 const vuelo3 = {
     id: 164354,
     nombre: 'tercer vuelo',
     activo: false,
     duracion: 5,
+    fecha: Date('March 09, 2020 05:15:30'),
 }
 
 vuelos.push(vuelo1)
 vuelos.push(vuelo2)
 vuelos.push(vuelo3)
 
-function verificarVuelosActivos(vuelos) {
+function verificarVuelos(vuelos) {
+    for (const vuelo in vuelos) {
+        console.log(vuelo)
+    }
 
-    if (vuelos.lenght() > 0) {
-        const vuelosActivos = vuelos.filter(e => e.activo === true)
-        return vuelosActivos
+}
+
+function notifyFlightsFunction(vuelos){
+
+    for (const vuelo of vuelos) {
+        console.log('NOTIFICACION DE VUELO PROXIMO')
     }
 }
 
 function main() {
 
     const tempo = crearTemporizador()
-    const evento1 = tempo.temporizarEventoRecurrente({ myName: "PRIMER EVENTO", myEvent: verificarVuelosActivos(vuelos), interval: 7000 })
-    console.log(evento1)
-    tempo.cancelarEventoRecurrente(evento1)
+
+    
+    try {
+        const evento1 = tempo.programarEventoRecurrente({ myName: "Mi evento", myEvent: () => { verificarVuelos(vuelos) }, interval: 3000 })
+        console.log(evento1)
+    } catch (error) {
+        console.log(error.message)
+    }
+
+    //tempo.cancelarEventoRecurrente(evento1)
 }
 
 main()

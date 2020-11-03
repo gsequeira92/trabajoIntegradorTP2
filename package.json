@@ -10,7 +10,8 @@
     "tdd": "nodemon --exec mocha --recursive --reporter min",
     "tdd-cov": "nodemon --exec nyc mocha --recursive",
     "coverage": " nyc mocha --recursive && nyc report --reporter=lcov",
-    "mati": "node src/servicios/mati/test/main.js"
+    "mati": "node src/servicios/mati/test/main.js",
+    "gas": "node src/servicios/gas/mainTemporizador.js"
   },
   "keywords": [],
   "author": "",
@@ -24,6 +25,7 @@
   "dependencies": {
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "moment": "^2.29.1",
     "mongodb": "^3.6.2",
     "pdfmake": "^0.1.68"
   }
