@@ -1,43 +1,27 @@
+const { exception } = require('console')
 const fs = require('fs')
 let objeto = {
 
 }
-function recibirObjeto(obj){
-objeto = obj
+function verificarObjeto(obj){
+    try{
+        if(obj === null){
+            throw exception
+        }else{
+            objeto = obj
+        }
+    }catch(err){
+        console.log('Objeto para llenar el pdf vacio')
+    }
+
 }
 
 module.exports = {
     contenido(){
     return objeto 
     },
-    recibirObjeto
+    verificarObjeto
 }
 
 
 
-
-
-
-
-
-/*contenido(){
-    try {
-        const data = fs.readFileSync('./pdf/datosParaPdf.txt', 'utf-8');
-        return data
-    } catch (error) {
-        throw new Error('ruta invalida')
-    }
-},
- array(str, separador) {
-     console.log(str)
-    const strings = str.split(separador)
-    console.log(strings.length)
-    const datos = []
-    for (let s of strings) {
-        if (s.length > 0) {
-            datos.push(s)
-            console.log(s)
-        }
-    }
-    return datos
-}*/
