@@ -1,18 +1,19 @@
 const PdfPrinter = require("pdfmake");
 const fs = require("fs");
-const datosPDF = require('./datosParaPdf')
+//const datosPDF = require('./datosParaPdf')
 const fonts = require("./fonts");
 const styles = require("./styles");
 const { guardarArchivo } = require("./guardarArchivo.js");
+const contenidoPdf = require("./pdfFacturaCancelacionVuelo");
 
 function facturaCancelada(nombreArchivo, rutaArchivo, objeto){
-datosPDF.verificarObjeto(objeto)
-const {content} = require("./pdfFacturaCancelacionVuelo");
+const {content} = contenidoPdf.devolverContenido(objeto)
 
 let docDefinition = {
     content: content,
     styles: styles
 };
+
 const printer = new PdfPrinter(fonts);
 let pdfDoc = printer.createPdfKitDocument(docDefinition);
 pdfDoc.pipe(guardarArchivo(rutaArchivo, nombreArchivo));

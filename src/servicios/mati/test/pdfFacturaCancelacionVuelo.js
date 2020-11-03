@@ -1,6 +1,6 @@
-const datos = require('./datosParaPdf')
-const objeto = datos.contenido()
-module.exports = {
+const devolverContenido = (objeto) => {
+    console.log('dentro')
+    return {
     content: [
         {
 			text: 'Aerolienas Marian',
@@ -86,4 +86,10 @@ module.exports = {
         },
 
     ]
+}
+}
+
+
+module.exports = {
+devolverContenido
 };
