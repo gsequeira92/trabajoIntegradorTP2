@@ -7,6 +7,8 @@ const { guardarArchivo } = require("./guardarArchivo.js");
 const contenidoPdf = require("./pdfBilleteVuelo");
 
 function billeteVuelo(nombreArchivo, rutaArchivo, objeto){
+    console.log('Iniciando el modulo pdf...')
+    console.log('Creando PDF para Billete de vuelo')
 const {content} = contenidoPdf.devolverContenido(objeto)
 
 let docDefinition = {
