@@ -1,6 +1,6 @@
 
 function crearBoleteriaAvion(daoVentas, mailer,pdf, notificador) {
-    const db = daoVentas;
+    const db = daoVentas; // hace falta esto?
     const rutaArchivo = '../../mati/pdfs'
     
     return {
@@ -22,7 +22,8 @@ function crearBoleteriaAvion(daoVentas, mailer,pdf, notificador) {
 
             const vuelo = await db.getVueloById(idVuelo) // si recibo el vuelo por parametro esto resulta precindible 
             
-            const asiento = await reservarAsiento(idVuelo)
+           
+            const asiento = await reservarAsiento(idVuelo)   // sacar el asiento de disponible a vendido
         
             const boleto = crearBoleto(pasajero, vuelo, asiento)
 
@@ -34,7 +35,7 @@ function crearBoleteriaAvion(daoVentas, mailer,pdf, notificador) {
 
             // mandar pdf por mail
             mandarBoletoXMail(boleto, rutaArchivo)
-            
+
             // suscribir a la alerta
             notificador.crearNotificacionVuelo(boleto)
         }

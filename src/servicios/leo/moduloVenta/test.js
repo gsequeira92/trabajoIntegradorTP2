@@ -1,8 +1,8 @@
-const mailer = import('../mailer/mailer.js')
-const dao = import('../moduloVenta/daoVenta.js')
-const boleteria = import('./boleteria.js')
-const pdfFactura = import('./appFacturaVuelo');
-const notificador = import('../../gas/Temporizador.js')
+const mailer = require('../mailer/mailer.js')
+const dao = require('../moduloVenta/daoVenta.js')
+const boleteria = require('./boleteria.js')
+const pdfFactura = require('./appFacturaVuelo');
+const notificador = require('../../gas/Temporizador.js')
 
 
 const clienteNuevo = {
