@@ -1,4 +1,3 @@
-//import PdfPrinter from "pdfmake"
 const PdfPrinter = require("pdfmake");
 const fs = require("fs");
 const datosPDF = require('./datosParaPdf')
