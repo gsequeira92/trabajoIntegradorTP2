@@ -1,6 +1,6 @@
 const fs = require('fs')
 let hoy = new Date();
-let fecha = hoy.getFullYear()+'-'+ hoy.getMonth()+'-'+hoy.getDay()+' a las '+hoy.getHours()+'.'+hoy.getMinutes()+'.'+hoy.getSeconds()
+let fecha = hoy.getFullYear()+'-'+ (hoy.getMonth()+1)+'-'+(hoy.getDay()+1)+' a las '+hoy.getHours()+'.'+hoy.getMinutes()+'.'+hoy.getSeconds()
 module.exports = {
     guardarArchivo(rutaArchivo, nombreArchivo){
         try {
