@@ -28,9 +28,9 @@ function modificarReservaVuelo() {
 
             const registroModificacion = modificarReserva(idReserva)
             await daoReservas.cancelar(idReserva)
+            const reserva = metodoBuscaReservaById(idReserva)
 
-            
-            const idNotificacion = tempo.crearNotificacionVuelo(idReserva)
+            const idNotificacion = tempo.crearNotificacionVuelo(reserva)
             tempo.cancelarEventoRecurrente(idNotificacion)
             billeteVuelo(nombreArchivo, rutaArchivo, objeto) 
             await mailer.enviarMail(idCliente)
