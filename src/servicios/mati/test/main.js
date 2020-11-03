@@ -1,6 +1,6 @@
 //const { billeteVuelo } = require("./appBilleteVuelo");
-//const { factura } = require("./appFacturaVuelo");
-const { facturaCancelada } = require("./appFacturaCancelacionVuelo");
+const { factura } = require("./appFacturaVuelo");
+//const { facturaCancelada } = require("./appFacturaCancelacionVuelo");
 
 const objeto = {
     avion:{ "modeloAvión": "BOEING 737 JET",
@@ -39,21 +39,26 @@ const objeto = {
 }}
 
 //nombreArchivo = `pdfTestBillete`;
-//nombreArchivo = `pdfTestFactura`;
-nombreArchivo = `pdfTestFacturaCancelada`;
-rutaArchivo = `pdfs/`;
+nombreArchivo = `pdfTestFactura`;
+//nombreArchivo = `pdfTestFacturaCancelada`;
+rutaArchivo = `src/servicios/mati/pdfs/`;
 
 async function main() {
     try {
-       // billeteVuelo(nombreArchivo, rutaArchivo, objeto)
-       // factura(nombreArchivo, rutaArchivo, objeto)
-        facturaCancelada(nombreArchivo, rutaArchivo, objeto)
+        console.log('Iniciando el modulo pdf...')
+        //console.log('Creando PDF para Factura de cancelacion de vuelo')
+       // console.log('Creando PDF para Billete de vuelo')
+        console.log('Creando PDF para Factura de vuelo')
+        //billeteVuelo(nombreArchivo, rutaArchivo, objeto) 
+         factura(nombreArchivo, rutaArchivo, objeto) 
+        //facturaCancelada(nombreArchivo, rutaArchivo, objeto) 
+        
     }
     catch (err) {
-        console.log('error')
+        console.log('Error en la creacion de PDF')
     } finally {
 
-        console.log('fin')
+        console.log('Fin del modulo PDF')
 
     }
 
