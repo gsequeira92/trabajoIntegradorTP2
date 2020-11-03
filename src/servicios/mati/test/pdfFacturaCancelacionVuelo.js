@@ -17,7 +17,7 @@ module.exports = {
         },
         'Adjuntamos los detalles\n\n',
         {
-            image: './img/logo-factura.png',
+            image: 'src/servicios/mati/img/logo-factura.png',
 			width: 40,
 			height: 30,
 		},
@@ -74,7 +74,8 @@ module.exports = {
         },
         "\n\n",
         {
-            image: './img/avion.jpg',
+            
+            image: 'src/servicios/mati/img/avion.jpg',
             width: 150,
             alignment: 'center'
         },
