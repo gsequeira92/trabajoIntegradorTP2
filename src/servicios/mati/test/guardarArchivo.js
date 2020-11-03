@@ -6,18 +6,11 @@ module.exports = {
         try {
             if (fs.existsSync(rutaArchivo)) {
                 console.log('La ruta existe.');
-                if(fs.existsSync(`${rutaArchivo}`+`${nombreArchivo}`+".pdf")) {
-                    console.log('archivo existe, se agrega (nro)')
+                console.log('Se agrega fecha y hora')
                     return fs.createWriteStream(`${rutaArchivo}`+`${nombreArchivo}`+ ' ' + fecha+".pdf")
-                  }else{
-                      console.log('el archivo no existia')
-                  }
-                 return fs.createWriteStream(`${rutaArchivo}`+`${nombreArchivo}`+".pdf")
               }
         } catch (error) {
             throw new Error('ruta invalida')
         }
     }
 }
-
-
