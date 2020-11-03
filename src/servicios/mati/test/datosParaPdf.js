@@ -1,4 +1,4 @@
-const { exception } = require('console')
+/*const { exception } = require('console')
 const fs = require('fs')
 let objeto = {
 
@@ -23,5 +23,5 @@ module.exports = {
     verificarObjeto
 }
 
-
+*/
 
