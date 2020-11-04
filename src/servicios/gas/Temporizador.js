@@ -1,11 +1,6 @@
 const moment = require ('moment')
 
-// const flight = new Date('December 25, 2020 22:15:30')
-// const flightDay = flight.getDay()
-// const flightHour = flight.getHours()
-// const flightYear = flight.getFullYear()
-//console.log(moment(flight).subtract(10, "days").calendar())
-
+//--------------------------------------------------------------------------------------------------//
 //intervalo 1 vez por hora, ese intervalo trae a los vuelos que tienen que ser notificados y marcarlos como ejecutado.
 //map-reduce mongoDb (Indices!)
 //Queue
@@ -56,7 +51,13 @@ function crearTemporizador() {
 
     return {
 
-        //parece que ahora podria usarse internamente para programar otras cosas
+       
+        /**
+         * parece que ahora podria usarse internamente para programar otras cosas
+         * @param {*} myName 
+         * @param {*} myEvent 
+         * @param {*} interval 
+         */
         programarEventoRecurrente({ myName, myEvent, interval }) {
 
 
@@ -98,8 +99,6 @@ function crearTemporizador() {
          * y activa la function notify()
          */
         activarNotificacionesPorHora(){
-
-            
             setInterval(() => {
         
                 flightNotificationsQueue.notify()
@@ -113,10 +112,19 @@ function crearTemporizador() {
          * 
          * @param {*} Reserva 
          */
-        crearNotificacionVuelo(Reserva){
+        crearNotificacionDeVuelo(Reserva){
+
+            if(!esReservaValida(Reserva)){
+                throw new Error('Ha intentado agregar notificaciones para una reserva invalida')
+            }
             flightNotificationsQueue.enqueue(Reserva)
         },
     }
+}
+
+function esReservaValida(unaReserva){
+
+    return unaReserva !== undefined && !unaReserva.isEmpty
 }
 
 function validarNombre(unNombre) {
