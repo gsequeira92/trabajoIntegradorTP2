@@ -23,36 +23,31 @@ function cancelarReservaVuelo(crearMailer, crearTemporizador, facturaCancelada) 
     return {
         execute: async (idCliente, idVuelo, idReserva) => {
 
-            if (!esClienteValido(idCliente)) {
-                throw new Error('El id de este cliente es incorrecto')
-            } else if (!esVueloValido(idVuelo)) {
-                throw new Error('El id de vuelo es incorrecto')
-            } else if (!esReservaValida(idReserva)) {
-                throw new Error('El id de esta reserva es incorrecto')
-            } else {
+            esClienteValido(idCliente)
+            esVueloValido(idVuelo)
+            esReservaValida(idReserva)
 
-                const reserva = await obtenerReservaPorId(idReserva)
-                //funcion que borra reserva de DB
-                cancelarReserva(idReserva, daoReservas)
-                //genera PDF con confirmacion de cancelacion
-                facturaCancelada(`${"cancelacion de reserva" + idReserva}`, rutaArchivo, reserva)
+            const reserva = await obtenerReservaPorId(idReserva)
+            //funcion que borra reserva de DB
+            cancelarReserva(idReserva, daoReservas)
+            //genera PDF con confirmacion de cancelacion
+            facturaCancelada(`${"cancelacion de reserva" + idReserva}`, rutaArchivo, reserva)
 
-                const options = {
-                    from: sobre.from,
-                    to: sobre.mail,
-                    subject: sobre.titulo,
-                    text: sobre.mensaje,
-                    attachments: [
-                        {
-                            path: sobre.adjunto
-                        }]
+            const options = {
+                from: sobre.from,
+                to: sobre.mail,
+                subject: sobre.titulo,
+                text: sobre.mensaje,
+                attachments: [
+                    {
+                        path: sobre.adjunto
+                    }]
 
-                }
-
-                //mailer envia mail
-                await mailer.enviarMail(options)
-                tempo.cancelarEventoRecurrente(idReserva)
             }
+
+            //mailer envia mail
+            await mailer.enviarMail(options)
+            tempo.cancelarEventoRecurrente(idReserva)
 
         }
     }
