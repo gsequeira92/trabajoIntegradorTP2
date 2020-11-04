@@ -1,4 +1,4 @@
-const moment = require ('moment')
+const moment = require('moment')
 
 //--------------------------------------------------------------------------------------------------//
 //intervalo 1 vez por hora, ese intervalo trae a los vuelos que tienen que ser notificados y marcarlos como ejecutado.
@@ -6,6 +6,9 @@ const moment = require ('moment')
 //Queue
 //Query en db para obtener eventos en el tiempo
 
+
+//cambiar de estructura
+//daoVuelos maneja vuelos para filtrar
 function flightNotificationsQueue() {
 
     this.dataStore = Array.prototype.slice.call(arguments, 0);
@@ -35,23 +38,25 @@ function flightNotificationsQueue() {
         });
     }
 
-    function notify(){
+    function notify() {
 
         const nearDeparture = this.getNearDepartureFlights()
         nearDeparture.forEach(console.log('NOTIFICACION DE VUELO'))
     }
 
-    function getNearDepartureFlights(){
-        
-       return this.dataStore.filter(e=>moment(e.horaPartida).endOf('hours').fromNow() === 2)
+    //vuelos cuyo horario se complete en 2 horas
+    //"funcion de dao"
+    function getNearDepartureFlights() {
+
+        return this.dataStore.filter(e => moment(e.horaPartida).endOf('hours').fromNow() === 2)
 
     }
 }
+
 function crearTemporizador() {
 
     return {
 
-       
         /**
          * parece que ahora podria usarse internamente para programar otras cosas
          * @param {*} myName 
@@ -61,13 +66,13 @@ function crearTemporizador() {
         programarEventoRecurrente({ myName, myEvent, interval }) {
 
 
-            if (!validarNombre(myName)) {
+            if (!esNombreValido(myName)) {
                 throw new Error('Ha ingresado un nombre erroneo')
 
-            } else if (!validarEvento(myEvent)) {
+            } else if (!esEventoValido(myEvent)) {
                 throw new Error('El evento/funcion no es valido')
 
-            } else if (!validarIntervalo(interval)) {
+            } else if (!esIntervaloValido(interval)) {
                 throw new Error('Ha ingresado un intervalo erroneo')
 
             } else {
@@ -98,36 +103,39 @@ function crearTemporizador() {
          * cada una hora revisa las notificaciones subscriptas
          * y activa la function notify()
          */
-        activarNotificacionesPorHora(){
-            setInterval(() => {
-        
+        activarNotificacionesPorHora(intervalName, intervalTime) {
+            const intervalObject = setInterval(() => {
+
                 flightNotificationsQueue.notify()
-                
-            }, 100000.08);
-        
+
+            }, intervalTime);
+
+            intervalObject.name = intervalName
+            return intervalName
         },
 
 
         /**
-         * 
+         * agrega reserva a la estructura de reservas a notificar
          * @param {*} Reserva 
          */
-        crearNotificacionDeVuelo(Reserva){
+        crearNotificacionDeVuelo(Reserva) {
 
-            if(!esReservaValida(Reserva)){
+            if (!esReservaValida(Reserva)) {
                 throw new Error('Ha intentado agregar notificaciones para una reserva invalida')
             }
             flightNotificationsQueue.enqueue(Reserva)
         },
+
     }
 }
 
-function esReservaValida(unaReserva){
+function esReservaValida(unaReserva) {
 
     return unaReserva !== undefined && !unaReserva.isEmpty
 }
 
-function validarNombre(unNombre) {
+function esNombreValido(unNombre) {
 
     let valido = false
     if (!unNombre.isEmpty && unNombre !== undefined) {
@@ -137,12 +145,12 @@ function validarNombre(unNombre) {
 }
 
 //isValid
-function validarEvento(unEvento) {
+function esEventoValido(unEvento) {
 
     return typeof unEvento === 'function'
 }
 
-function validarIntervalo(interval) {
+function esIntervaloValido(interval) {
 
     let valido = false
     if (!interval.isNan && interval > 0) {
