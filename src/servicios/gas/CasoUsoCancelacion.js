@@ -4,6 +4,7 @@ const { facturaCancelada } = require('../mati/test/appFacturaCancelacionVuelo')
 const { crearDaoCliente } = require('../daos/daoPasajeros')
 const { crearDaoReservas } = require('../daos/daoReservas')
 const { crearDaoVuelo } = require('../daos/daoVuelo')
+const rutaArchivo = '../mati/pdfs'
 
 const credencial = {}
 credencial.user = "exampletaller@outlook.com"
@@ -12,12 +13,11 @@ credencial.servicio = "outlook"
 
 //crear capa de ruteo que use este caso de uso (Express)
 //agregar interfaz/factory para abstraer capa de ruteo de capa de negocio
-
+//un dao para cada entidad/objeto
 
 function cancelarReservaVuelo(crearMailer, crearTemporizador, facturaCancelada) {
 
     const tempo = crearTemporizador()
-    //mailer recibe credencial por parametro
     const mailer = crearMailer(credencial)
 
     return {
@@ -30,14 +30,36 @@ function cancelarReservaVuelo(crearMailer, crearTemporizador, facturaCancelada) 
             } else if (!esReservaValida(idReserva)) {
                 throw new Error('El id de esta reserva es incorrecto')
             } else {
+
+                const reserva = await obtenerReservaPorId(idReserva)
+                //funcion que borra reserva de DB
                 cancelarReserva(idReserva, daoReservas)
-                facturaCancelada(nombreArchivo, rutaArchivo, objeto)
-                await mailer.enviarMail()
+                //genera PDF con confirmacion de cancelacion
+                facturaCancelada(`${"cancelacion de reserva" + idReserva}`, rutaArchivo, reserva)
+
+                const options = {
+                    from: sobre.from,
+                    to: sobre.mail,
+                    subject: sobre.titulo,
+                    text: sobre.mensaje,
+                    attachments: [
+                        {
+                            path: sobre.adjunto
+                        }]
+
+                }
+
+                //mailer envia mail
+                await mailer.enviarMail(options)
                 tempo.cancelarEventoRecurrente(idReserva)
             }
 
         }
     }
+}
+
+async function obtenerReservaPorId(idReserva, daoReservas) {
+    return await daoReservas.getById(idReserva)
 }
 
 async function cancelarReserva(idReserva, daoReservas) {
