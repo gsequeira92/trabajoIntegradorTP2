@@ -14,3 +14,7 @@ module.exports = {
         }
     }
 }
+//validar ruta
+//crear string (nombre de archivo)
+//crear el writestream 
+//devolverlo 

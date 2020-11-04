@@ -6,21 +6,21 @@ const styles = require("./styles");
 const { guardarArchivo } = require("./guardarArchivo.js");
 const contenidoPdf = require("./pdfBilleteVuelo");
 
-function billeteVuelo(nombreArchivo, rutaArchivo, objeto){
+function billeteVuelo(nombreArchivo, rutaArchivo, objeto) { //"generar pdf billete" y objeto por datosDelBillete
     console.log('Iniciando el modulo pdf...')
     console.log('Creando PDF para Billete de vuelo')
-const {content} = contenidoPdf.devolverContenido(objeto)
+    const { content } = contenidoPdf.devolverContenido(objeto)//sugerencia marian "crearContenidoPdfBillete"
 
-let docDefinition = {
-    content: content,
-    styles: styles
-};
+    let docDefinition = {
+        content: content,
+        styles: styles
+    };
 
-const printer = new PdfPrinter(fonts);
-let pdfDoc = printer.createPdfKitDocument(docDefinition);
-pdfDoc.pipe(guardarArchivo(rutaArchivo, nombreArchivo)); 
-pdfDoc.end();
-console.log('PDF guardado')
+    const printer = new PdfPrinter(fonts);
+    let pdfDoc = printer.createPdfKitDocument(docDefinition);
+    pdfDoc.pipe(guardarArchivo(rutaArchivo, nombreArchivo));
+    pdfDoc.end();
+    console.log('PDF guardado')
 
 }
 
