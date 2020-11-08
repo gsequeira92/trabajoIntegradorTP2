@@ -1,5 +1,4 @@
-const devolverContenido = (objeto) => {
-    console.log('dentro')
+const crearContenidoPdfBillete = (objeto) => {
     return {
     content: [
         {
@@ -77,5 +76,5 @@ const devolverContenido = (objeto) => {
 
 
 module.exports = {
-devolverContenido
+    crearContenidoPdfBillete
 };

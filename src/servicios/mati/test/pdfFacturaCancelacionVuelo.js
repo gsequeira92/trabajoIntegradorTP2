@@ -1,5 +1,4 @@
-const devolverContenido = (objeto) => {
-    console.log('dentro')
+const crearContenidoFacturaCancelada = (objeto) => {
     return {
     content: [
         {
@@ -91,5 +90,5 @@ const devolverContenido = (objeto) => {
 
 
 module.exports = {
-devolverContenido
+    crearContenidoFacturaCancelada
 };

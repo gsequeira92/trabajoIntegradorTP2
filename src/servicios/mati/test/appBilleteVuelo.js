@@ -1,15 +1,12 @@
 const PdfPrinter = require("pdfmake");
 const fs = require("fs");
-//const datosPDF = require('./datosParaPdf')
 const fonts = require("./fonts");
 const styles = require("./styles");
 const { guardarArchivo } = require("./guardarArchivo.js");
 const contenidoPdf = require("./pdfBilleteVuelo");
 
-function billeteVuelo(nombreArchivo, rutaArchivo, objeto) { //"generar pdf billete" y objeto por datosDelBillete
-    console.log('Iniciando el modulo pdf...')
-    console.log('Creando PDF para Billete de vuelo')
-    const { content } = contenidoPdf.devolverContenido(objeto)//sugerencia marian "crearContenidoPdfBillete"
+function generarPdfBillete(nombreArchivo, rutaArchivo, datosDelBillete) { //"generar pdf billete" y objeto por datosDelBillete
+    const { content } = contenidoPdf.crearContenidoPdfBillete(datosDelBillete)//sugerencia marian "crearContenidoPdfBillete"
 
     let docDefinition = {
         content: content,
@@ -20,10 +17,9 @@ function billeteVuelo(nombreArchivo, rutaArchivo, objeto) { //"generar pdf bille
     let pdfDoc = printer.createPdfKitDocument(docDefinition);
     pdfDoc.pipe(guardarArchivo(rutaArchivo, nombreArchivo));
     pdfDoc.end();
-    console.log('PDF guardado')
 
 }
 
 module.exports = {
-    billeteVuelo
+    generarPdfBillete
 }

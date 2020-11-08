@@ -1,29 +1,25 @@
 const PdfPrinter = require("pdfmake");
 const fs = require("fs");
-//const datosPDF = require('./datosParaPdf')
 const fonts = require("./fonts");
 const styles = require("./styles");
 const { guardarArchivo } = require("./guardarArchivo.js");
 const contenidoPdf = require("./pdfFacturaCancelacionVuelo");
 
-function facturaCancelada(nombreArchivo, rutaArchivo, objeto){
-    console.log('Iniciando el modulo pdf...')
-    console.log('Creando PDF para Factura de cancelacion de vuelo')
-const {content} = contenidoPdf.devolverContenido(objeto)
+function generarFacturaCancelada(nombreArchivo, rutaArchivo, datosFactura) {
+    const { content } = contenidoPdf.crearContenidoFacturaCancelada(datosFactura)
 
-let docDefinition = {
-    content: content,
-    styles: styles
-};
+    let docDefinition = {
+        content: content,
+        styles: styles
+    };
 
-const printer = new PdfPrinter(fonts);
-let pdfDoc = printer.createPdfKitDocument(docDefinition);
-pdfDoc.pipe(guardarArchivo(rutaArchivo, nombreArchivo));
-pdfDoc.end();
-console.log('PDF guardado')
+    const printer = new PdfPrinter(fonts);
+    let pdfDoc = printer.createPdfKitDocument(docDefinition);
+    pdfDoc.pipe(guardarArchivo(rutaArchivo, nombreArchivo));
+    pdfDoc.end();
 
 }
 
 module.exports = {
-    facturaCancelada
+    generarFacturaCancelada
 }
