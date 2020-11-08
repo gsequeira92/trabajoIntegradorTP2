@@ -1,10 +1,9 @@
-const mailer = require('../mailer/mailer.js')
-const dao = require('../moduloVenta/daoVenta.js')
-const boleteria = require('./boleteria.js')
-const pdfFactura = require('./appFacturaVuelo');
-const notificador = require('../../gas/Temporizador.js')
+
+const dao = require('../moduloVenta/daoVenta.js') // TODO : corre
+const { crearBoleteriaAvion } = require('./boleteria.js')
 
 
+/*
 const clienteNuevo = {
     nombre: 'Ada',
     apellido: 'Lovelace',
@@ -20,14 +19,19 @@ const vuelo = {
     asientos_disponibles: ['47G', '65F'],
     vuelo_id: '28'
 }
+*/
 
+// CREAR MASTER UTILIZANDO EL FACTORY -> dao pasajero/vuelo/boleto, mailer, pdfFactura, notificador
 
+dataVenta ={
+    c
+}
 
 try {
-    boleteria = crearBoleteriaAvion(dao, mailer, pdfFactura, notificador)
-    boleteria.venderBoleto(clienteNuevo, vueki.vuelo_id)
+    const boleteria = crearBoleteriaAvion()
+    await boleteria.venderBoleto(clienteNuevo, vuelo.vuelo_id)
 } catch (e) {
-    console.log(e.message)
+    console.log(e.message) // esto esta bien?
 }
 
 

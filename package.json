@@ -11,7 +11,7 @@
     "tdd-cov": "nodemon --exec nyc mocha --recursive",
     "coverage": " nyc mocha --recursive && nyc report --reporter=lcov",
     "mati": "node src/servicios/mati/test/main.js",
-    "gas": "node src/servicios/gas/mainTemporizador.js"
+    "gas": "node src/servicios/gas/TestCU.js"
   },
   "keywords": [],
   "author": "",
