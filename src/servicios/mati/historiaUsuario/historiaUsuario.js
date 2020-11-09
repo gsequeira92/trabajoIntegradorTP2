@@ -1,42 +1,29 @@
-console.log('historia usuario')
-/*Modificación de reserva en boleto de avión existente(Mati) ESPECIFICAR QUE TIPO sugerencia "modficar un campo tipo boolean"
+/*Modificación de reserva en boleto de avión existente(Mati) 
+LA MODIFICACION SERA PARA CAMBIAR LA COMIDA A SIN TACC
 -Validar que exista reserva 
--Validar que exista cliente
--Validar que exista vuelo 
+-Cambiar el tipo de comida
 -Generar PDF con nuevo boleto
 -Enviar por mail
--Cambiar alerta temporizada a la nueva fecha*/
+*/
 
-//ver la diferencia entre vuelo y reserva, confunde
+function modificarComidaDeVuelo({ mailer, daoReservas, billeteVuelo }) {
 
-const {crearMailer} = require('../leo/mailer/mailer') 
-const {crearDaoCliente} = require('../daos/daoPasajeros')
-const {crearDaoReservas} = require('../daos/daoReservas')
-const {crearDaoVuelo} = require('../daos/daoVuelo')
-const { billeteVuelo } = require("./appBilleteVuelo");//deshacerse de esto
-
-function modificarComidaDeVuelo() {
-
-    const tempo = crearTemporizador()
-    const mailer = crearMailer()
+    mailer = getMailer()
+    billeteVuelo = billeteVuelo()
+    daoReservas = crearDaoReservas()
 
     return {
-        execute: async (idReserva,boolean) => {
-
-            esClienteValido(idCliente) //pedirsela al DAO correspondiente
-            esVueloValido(idVuelo) //pedirsela al DAO correspondiente
-            esReservaValida(idReserva) //pedirsela al DAO correspondiente
-
-            const registroModificacion = modificarReserva(idReserva)
-            await daoReservas.modificarComida(idReserva) //no es necesario cancelarlo, se modifica directamente
-            const reserva = metodoBuscaReservaById(idReserva)
-
-            billeteVuelo(nombreArchivo, rutaArchivo, objeto) 
-            await mailer.enviarMail(idCliente)
+        execute: async (idReserva, boolean) => {
+            //Recibo el id para identificar de manera unica la reserva, y el boolean para ver si la comida es Sin Tacc
+            //verdadero es SIN TACC, falso es CON TACC
+            const reserva = await daoReservas.getById(idReserva)
+            if (reserva) {
+                await daoReservas.modificarComida(boolean) //no es necesario cancelarlo, se modifica directamente
+                billeteVuelo(nombreArchivo, rutaArchivo, objeto)
+                await mailer.enviarMail(idCliente)
+            }
         }
-
-
     }
 }
 
-module.exports = {modificarComidaDeVuelo}
+module.exports = { modificarComidaDeVuelo }
