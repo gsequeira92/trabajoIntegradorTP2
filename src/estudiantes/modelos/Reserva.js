@@ -4,47 +4,56 @@ let nextId = 1
 
 function crearReserva(objeto) {
 
-    const estu = {}
+    const reserv = {}
 
-    if (!objeto.nombre) {
-        throw crearErrorArgumentosInvalidos('nombre', 'campo requerido')
+    if (!objeto.idVuelo) {
+        throw crearErrorArgumentosInvalidos('idVuelo', 'campo requerido')
     } else {
-        estu.nombre = objeto.nombre
+        reserv.idVuelo = objeto.idVuelo
     }
 
-    if (!objeto.apellido) {
-        throw crearErrorArgumentosInvalidos('apellido', 'campo requerido')
+    if (!objeto.destino) {
+        throw crearErrorArgumentosInvalidos('destino', 'campo requerido')
     } else {
-        estu.apellido = objeto.apellido
+        reserv.destino = objeto.destino
     }
 
-    if (!objeto.edad) {
-        throw crearErrorArgumentosInvalidos('edad', 'campo requerido')
-    }
-
-    if (isNaN(parseInt(objeto.edad))) {
-        throw crearErrorArgumentosInvalidos('nombre', 'debe ser un entero')
+    if (!objeto.origen) {
+        throw crearErrorArgumentosInvalidos('destino', 'campo requerido')
     } else {
-        estu.edad = objeto.edad
+        reserv.origen = objeto.origen
     }
 
-    if (!objeto.dni) {
-        throw crearErrorArgumentosInvalidos('dni', 'campo requerido')
+    if (!objeto.asiento) {
+        throw crearErrorArgumentosInvalidos('asiento', 'campo requerido')
     }
 
-    if (isNaN(parseInt(objeto.dni))) {
-        throw crearErrorArgumentosInvalidos('dni', 'debe contener unicamente caracteres numericos')
+    if (!objeto.clase) {
+        reserv.clase = "economica"
+    }
+    if (!objeto.comidaSinTacc) {
+        throw crearErrorArgumentosInvalidos('comidaSinTacc', 'campo requerido')
+    }else {
+        reserv.comidaSinTacc = objeto.comidaSinTacc
+    }
+
+    if (!objeto.dniPasajero) {
+        throw crearErrorArgumentosInvalidos('dniPasajero', 'campo requerido')
+    }
+
+    if (isNaN(parseInt(objeto.dniPasajero))) {
+        throw crearErrorArgumentosInvalidos('dniPasajero', 'debe contener unicamente caracteres numericos')
     } else {
-        estu.dni = objeto.dni
+        reserv.dniPasajero = objeto.dniPasajero
     }
-
+    
     if (!objeto.id) {
-    estu.id = nextId++
+        reserv.id = nextId++
     } else {
-        estu.id = objeto.id
+        reserv.id = objeto.id
     }
 
-    return estu
+    return reserv
 }
 
 module.exports = { crearReserva }

@@ -4,28 +4,18 @@ let nextId = 1
 
 function crearPasajero(objeto) {
 
-    const estu = {}
+    const pasajero = {}
 
     if (!objeto.nombre) {
         throw crearErrorArgumentosInvalidos('nombre', 'campo requerido')
     } else {
-        estu.nombre = objeto.nombre
+        pasajero.nombre = objeto.nombre
     }
 
     if (!objeto.apellido) {
         throw crearErrorArgumentosInvalidos('apellido', 'campo requerido')
     } else {
-        estu.apellido = objeto.apellido
-    }
-
-    if (!objeto.edad) {
-        throw crearErrorArgumentosInvalidos('edad', 'campo requerido')
-    }
-
-    if (isNaN(parseInt(objeto.edad))) {
-        throw crearErrorArgumentosInvalidos('nombre', 'debe ser un entero')
-    } else {
-        estu.edad = objeto.edad
+        pasajero.apellido = objeto.apellido
     }
 
     if (!objeto.dni) {
@@ -33,18 +23,28 @@ function crearPasajero(objeto) {
     }
 
     if (isNaN(parseInt(objeto.dni))) {
+        throw crearErrorArgumentosInvalidos('dni', 'debe ser un entero')
+    } else {
+        pasajero.dni = objeto.dni
+    }
+
+    if (!objeto.mail) {
+        throw crearErrorArgumentosInvalidos('mail', 'campo requerido')
+    }
+  // argregarla validacion de mail
+    if (isNaN(parseInt(objeto.mail))) {
         throw crearErrorArgumentosInvalidos('dni', 'debe contener unicamente caracteres numericos')
     } else {
-        estu.dni = objeto.dni
+        pasajero.mail = objeto.mail
     }
 
     if (!objeto.id) {
-    estu.id = nextId++
+        pasajero.id = nextId++
     } else {
-        estu.id = objeto.id
+        pasajero.id = objeto.id
     }
 
-    return estu
+    return pasajero
 }
 /*
     function pasajeroValido(pasajero) {  // esta bien esto? 

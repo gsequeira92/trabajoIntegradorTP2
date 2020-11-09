@@ -6,45 +6,71 @@ function crearVuelo(objeto) {
 
     const vuelo = {}
 
-    if (!objeto.nombre) {
-        throw crearErrorArgumentosInvalidos('nombre', 'campo requerido')
+    if (!objeto.precio) {
+        throw crearErrorArgumentosInvalidos('precio', 'campo requerido')
     } else {
-        estu.nombre = objeto.nombre
+        vuelo.nombre = objeto.nombre
     }
-
-    if (!objeto.apellido) {
-        throw crearErrorArgumentosInvalidos('apellido', 'campo requerido')
+    if (isNaN(parseFloat(objeto.precio))) {
+        throw crearErrorArgumentosInvalidos('precio', 'debe contener unicamente caracteres numericos')
     } else {
-        estu.apellido = objeto.apellido
+        vuelo.precio = objeto.precio
     }
 
-    if (!objeto.edad) {
-        throw crearErrorArgumentosInvalidos('edad', 'campo requerido')
-    }
-
-    if (isNaN(parseInt(objeto.edad))) {
-        throw crearErrorArgumentosInvalidos('nombre', 'debe ser un entero')
+    if (!objeto.duracion) {
+        throw crearErrorArgumentosInvalidos('duracion', 'campo requerido')
+    } 
+    if (isNaN(Date.parse(objeto.duracion))) {
+        throw crearErrorArgumentosInvalidos('duracion', 'debe contener unicamente caracteres con formato Date')
     } else {
-        estu.edad = objeto.edad
+        vuelo.duracion = objeto.duracion
     }
 
-    if (!objeto.dni) {
-        throw crearErrorArgumentosInvalidos('dni', 'campo requerido')
+    if (!objeto.partida) {
+        throw crearErrorArgumentosInvalidos('partida', 'campo requerido')
+    } 
+    if (isNaN(Date.parse(objeto.partida))) {
+        throw crearErrorArgumentosInvalidos('partida', 'debe contener unicamente caracteres con formato Date')
+    } else {
+        vuelo.partida = objeto.partida
+    }
+
+    if (!objeto.arribo) {
+        throw crearErrorArgumentosInvalidos('arribo', 'campo requerido')
+    } 
+    if (isNaN(Date.parse(objeto.arribo))) {
+        throw crearErrorArgumentosInvalidos('arribo', 'debe contener unicamente caracteres con formato Date')
+    } else {
+        vuelo.arribo = objeto.arribo
+    }
+
+    if (!objeto.millaje) {
+        throw crearErrorArgumentosInvalidos('millaje', 'campo requerido')
+    }
+
+    if (isNaN(parseInt(objeto.millaje))) {
+        throw crearErrorArgumentosInvalidos('millaje', 'debe contener unicamente caracteres numericos')
+    } else {
+        vuelo.millaje = objeto.millaje
+    }
+
+    if (!objeto.numeroAvion) {
+        throw crearErrorArgumentosInvalidos('numeroAvion', 'campo requerido')
     }
 
     if (isNaN(parseInt(objeto.dni))) {
-        throw crearErrorArgumentosInvalidos('dni', 'debe contener unicamente caracteres numericos')
+        throw crearErrorArgumentosInvalidos('numeroAvion', 'debe contener unicamente caracteres numericos')
     } else {
-        estu.dni = objeto.dni
+        vuelo.numeroAvion = objeto.numeroAvion
     }
 
     if (!objeto.id) {
-    estu.id = nextId++
+    vuelo.id = nextId++
     } else {
-        estu.id = objeto.id
+        vuelo.id = objeto.id
     }
 
-    return estu
+    return vuelo
 }
 
 module.exports = { crearVuelo }

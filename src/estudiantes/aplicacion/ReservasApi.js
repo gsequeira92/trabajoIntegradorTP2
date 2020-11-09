@@ -3,9 +3,9 @@ const { crearReserva } = require('../modelos/Reserva.js')
 
 function crearReservaApi(reservasDao) {
     return {
-        getByID: async (dato) => {
+        getById: async (dato) => {
             const IDValido = crearIDValido(dato)
-            const reserva = await reservasDao.getByID(dniValido)
+            const reserva = await reservasDao.getById(IDValido)
             return reserva
         },
 
@@ -24,11 +24,11 @@ function crearReservaApi(reservasDao) {
             await reservasDao.deleteById(idNumerico)
         },
         replaceById: async (datos, unId) => {
-            if (!datos.id || !unId || datos.id != unId) {
+            if (!datos.idReserva || !unId || datos.idReserva != unId) {
                 throw crearErrorArgumentosInvalidos('no coinciden los ids')
             }
             const reserva = crearReserva(datos)
-            await reservasDao.updateById(reserva)
+            await reservasDao.updateByIdReserva(reserva)
             return reserva
         },
 

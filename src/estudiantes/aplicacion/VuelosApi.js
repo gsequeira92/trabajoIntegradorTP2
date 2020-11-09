@@ -15,13 +15,15 @@ function creaVuelosApi(vueloDao) {
         },
 
         getAsientoDisponible: async (datos) => {
-            const rango = crearRangoValido(datos)
-            vuelo = await vueloDao.getByAge(rango)
+            const idVuelo = crearIdValido(datos)
+            vuelo = await vueloDao.getById(idVuelo)
+            vuelo
             return vuelo
         },
-        createVuelo: async (datos) => {
+        //esto no se si anda
+        create: async (datos) => {
             const vuelo = crearVuelo(datos)
-            await vueloDao.addUnique(vuelo, 'dni')
+            await vueloDao.addUnique(vuelo, 'id')
             return vuelo
         },
         deleteById: async (dato) => {
@@ -29,11 +31,11 @@ function creaVuelosApi(vueloDao) {
             await vueloDao.deleteById(idNumerico)
         },
         replaceById: async (datos, unId) => {
-            if (!datos.id || !unId || datos.id != unId) {
+            if (!datos.idVuelo || !unId || datos.idVuelo != unId) {
                 throw crearErrorArgumentosInvalidos('no coinciden los ids')
             }
             const vuelo = crearVuelo(datos)
-            await vueloDao.updateById(vuelo)
+            await vueloDao.updateByIdVuelo(vuelo)
             return vuelo
         }
     }
@@ -41,7 +43,7 @@ function creaVuelosApi(vueloDao) {
 function crearIdValido(dato) {
     const idNumerico = parseInt(dato)
     if (isNaN(idNumerico)) {
-        throw crearErrorArgumentosInvalidos('el id del estudiante debe ser numerico')
+        throw crearErrorArgumentosInvalidos('el id del vuelo debe ser numerico')
     }
     return idNumerico
 }

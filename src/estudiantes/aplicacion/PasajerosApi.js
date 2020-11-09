@@ -4,7 +4,7 @@ const { crearPasajero } = require('../modelos/Pasajero.js')
 function crearPasajerosApi(pasajerosDao) {
     return {
         getByDni: async (dato) => {
-            const dniValido = crearDniValido(dato)
+            const dniValido = dniValido(dato)
             const pasajero = await pasajerosDao.getByDni(dniValido)
             return pasajero
         },
@@ -13,25 +13,21 @@ function crearPasajerosApi(pasajerosDao) {
             pasajeros = await pasajerosDao.getAll()
             return pasajeros
         },
-        //no se si sirve
-        getByAge: async (datos) => {
-            const rango = crearRangoValido(datos)
-            pasajeros = await pasajerosDao.getByAge(rango)
-            return pasajeros
-        },
+
+   
         create: async (datos) => {
             const pasajero = crearEstudiante(datos)
             await pasajerosDao.addUnique(pasajero, 'dni')
             return pasajero
         },
         deleteById: async (dato) => {
-            const idNumerico = crearIdValido(dato)
+               const dniValido = dniValido(dato)
             await pasajerosDao.deleteById(idNumerico)
         },
-        //para el CU de modificacion
-        replaceById: async (datos, unId) => {
-            if (!datos.id || !unId || datos.id != unId) {
-                throw crearErrorArgumentosInvalidos('no coinciden los ids')
+        
+        replaceById: async (datos, unDni) => {
+            if (!datos.dni || !unDni || datos.dni != unDni) {
+                throw crearErrorArgumentosInvalidos('no coinciden los dnis')
             }
             const pasajero = crearpasajero(datos)
             await pasajerosDao.updateById(pasajero)
@@ -40,7 +36,7 @@ function crearPasajerosApi(pasajerosDao) {
         exist: async (dato) => {
             const existe = false
 
-            const pasajero = getByDni(dato)
+            const pasajero =  await pasajerosDao.getByDni(dato)
             if (!isNaN(pasajero)) {
                 existe = true
             }
@@ -49,25 +45,17 @@ function crearPasajerosApi(pasajerosDao) {
 
         },
         agregarPasajero: async (datos) => {
-            await pasajerosDao.addUnique
+            await pasajerosDao.addUnique(pasajero, 'dni')
         }
 
 
     }
 }
-/* // 
 
-function crearIdValido(dato) {
-    if (isNaN(dato)) {
-        throw crearErrorArgumentosInvalidos('el dni del estudiante debe ser numerico')
-    }
-    return dato
-}
-*/
-function crearIdValido(dato) {
+function dniValido(dato) {
     const idNumerico = parseInt(dato)
     if (isNaN(idNumerico)) {
-        throw crearErrorArgumentosInvalidos('el id del estudiante debe ser numerico')
+        throw crearErrorArgumentosInvalidos('el dni del pasajero debe ser numerico')
     }
     return idNumerico
 }

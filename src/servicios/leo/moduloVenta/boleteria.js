@@ -13,6 +13,7 @@ function crearBoleteriaAvion(master) {
 
             const vuelo = await master.vueloApi.getVueloById(datosVenta.idVuelo)
             const asiento = await master.vueloApi.getAsientoDisponible(datosVenta.idVuelo)
+            // abstraer la creacion del 
             const boleto = await master.reservaApi.crearBoleto(datosVenta.pasajero, vuelo, asiento)
 
             // esto lo saco poruque en el crearBoleto de arriba en la creacion ya se guarda en la db

@@ -1,29 +1,35 @@
-const avion1 = { "modeloAvión": "BOEING 737 JET",
-"numeroAvion": "5312563643",   
-"capacidad":  "132"
-},
-const avion2 = { "modeloAvión": "BOEING 737 JET",
-"numeroAvion": "5312563643",   
-"capacidad":  "132"
-},
+const {
+    crearErrorArgumentosInvalidos,
+   
+} = require('../../compartido/errores/ApiError.js')
 
-const avion3 = { "modeloAvión": "BOEING 737 JET",
-"numeroAvion": "5312563643",   
-"capacidad":  "132"
-},
+async function crearAvionDaoMemoria() {
+    const elementos = []
 
-const avion4 = { "modeloAvión": "BOEING 737 JET",
-"numeroAvion": "5312563643",   
-"capacidad":  "132"
-},
+    return {
+        add: async (elemento) => {
+            elementos.push(elemento)
+        },
+        addUnique: async (elemento, claveUnica) => {
+            const existe = elementos.some(e => {
+                return e[claveUnica] === elemento[claveUnica]
+            })
+            if (existe) {
+                throw crearErrorArgumentosInvalidos(claveUnica, 'debe ser unico')
+            }
+            elementos.push(elemento)
+        },
+      
+        getAll: async () => {
+            return [...elementos]
+        },
+        getByID: async (id) => {
+            return elementos.filter(e => e.id === id)
+        },
+  
 
-const aviones=[]
-
-aviones.push(avion1)
-aviones.push(avion2)
-aviones.push(avion3)
-aviones.push(avion4)
-
-function getAvion(params){
-    return params
+        close: async () => { }
+    }
 }
+
+module.exports = { crearAvionDaoMemoria }
