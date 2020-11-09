@@ -6,7 +6,7 @@ const { crearDaoReservas } = require('../daos/daoReservas')
 const rutaArchivo = '../mati/pdfs'
 
 
-function crearCUCancelacionReserva({ mailer, tempo, facturaCancelada, daoReservas, daoClientes }) {
+function crearCUCancelacionReserva({ mailer, tempo, pdfCancelacion, daoReservas, daoClientes }) {
 
     mailer = getMailer()
     tempo = crearTemporizador()
@@ -21,23 +21,21 @@ function crearCUCancelacionReserva({ mailer, tempo, facturaCancelada, daoReserva
 
             if (cliente) {
                 const reserva = await daoReservas.getReservaById(idReserva)
-                const mailPasajero = reserva.mail
+                //const mailPasajero = reserva.mail
 
-                //funcion que borra reserva de DB
+                //DAO borra reserva de DB
                 await daoReservas.delete(idReserva)
 
                 //genera PDF con confirmacion de cancelacion
                 pdfCancelacion(`${"cancelacion de reserva" + idReserva}`, rutaArchivo, reserva)
 
                 //hay que agregar el pfd como adjunto al sobre del mailer
-                
-                 
+
+
                 //mailer deberia incluir el sobre para configurarlos de alguna forma y solo usar sendMail()
-                await mailer.sendMail(sobre)
+                mailer.sendMail(sobre)
                 tempo.cancelarEventoRecurrente(idReserva)
-
             }
-
         }
     }
 }

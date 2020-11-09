@@ -3,8 +3,8 @@ const moment = require('moment')
 //daoVuelos maneja vuelos para filtrar
 //intervalo 1 vez por hora, ese intervalo trae a los vuelos que tienen que ser notificados y marcarlos como ejecutado.
 //map-reduce mongoDb (Indices!)
-//Queue
 //Query en db para obtener eventos en el tiempo
+
 function flightNotificationsQueue() {
 
     this.dataStore = Array.prototype.slice.call(arguments, 0);
@@ -49,6 +49,18 @@ function flightNotificationsQueue() {
     }
 }
 
+const reservasANotificar = []
+
+function notify() {
+
+    getNearDepartureFlights(reservasANotificar).forEach(console.log('NOTIFICACION VUELO'))
+}
+
+function getNearDepartureFlights(reservasANotificar) {
+
+    return reservasANotificar.filter(e => moment(e.horaPartida).endOf('hors').fromNow() === 2)
+}
+
 function programarNotificaciones() {
 
     return {
@@ -60,7 +72,7 @@ function programarNotificaciones() {
         activarNotificacionesPorHora(intervalName, intervalTime) {
             const intervalObject = setInterval(() => {
 
-                flightNotificationsQueue.notify()
+                notify()
 
             }, intervalTime);
 
@@ -78,7 +90,7 @@ function programarNotificaciones() {
             if (!esReservaValida(Reserva)) {
                 throw new Error('Ha intentado agregar notificaciones para una reserva invalida')
             }
-            flightNotificationsQueue.enqueue(Reserva)
+            reservasANotificar.push(Reserva)
         },
 
 
