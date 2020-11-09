@@ -10,26 +10,25 @@ console.log('historia usuario')
 //ver la diferencia entre vuelo y reserva, confunde
 
 const {crearMailer} = require('../leo/mailer/mailer') 
-const {crearTemporizador} = require('../gas/Temporizador')
 const {crearDaoCliente} = require('../daos/daoPasajeros')
 const {crearDaoReservas} = require('../daos/daoReservas')
 const {crearDaoVuelo} = require('../daos/daoVuelo')
-const { billeteVuelo } = require("./appBilleteVuelo");
+const { billeteVuelo } = require("./appBilleteVuelo");//deshacerse de esto
 
-function modificarReservaVuelo() {
+function modificarComidaDeVuelo() {
 
     const tempo = crearTemporizador()
     const mailer = crearMailer()
 
     return {
-        execute: async (idCliente, idReserva) => {
+        execute: async (idReserva,boolean) => {
 
             esClienteValido(idCliente) //pedirsela al DAO correspondiente
             esVueloValido(idVuelo) //pedirsela al DAO correspondiente
             esReservaValida(idReserva) //pedirsela al DAO correspondiente
 
             const registroModificacion = modificarReserva(idReserva)
-            await daoReservas.cancelar(idReserva) //no es necesario cancelarlo, se modifica directamente
+            await daoReservas.modificarComida(idReserva) //no es necesario cancelarlo, se modifica directamente
             const reserva = metodoBuscaReservaById(idReserva)
 
             billeteVuelo(nombreArchivo, rutaArchivo, objeto) 
@@ -40,16 +39,4 @@ function modificarReservaVuelo() {
     }
 }
 
-async function  esClienteValido(idCliente){
-
-}
-
-async function esVueloValido(idVuelo){
-    
-}
-
-async function esReservaValida(idVuelo){
-    
-}
-
-module.exports = {modificarReservaVuelo}
+module.exports = {modificarComidaDeVuelo}
