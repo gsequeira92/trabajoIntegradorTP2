@@ -4,6 +4,13 @@ const { factoryFacturaCancelada } = require('../factorys/factoryPdfs.js')
 import fs from 'fs'
 const rutaArchivo = '../mati/pdfs'
 
+//los factories se usan asi?
+//Armar sobre por partespara enviar mail
+//Blob para enviar el pdf?
+//De donde sale reservas api??
+
+
+
 function crearCUCancelacionReserva({ ReservasApi}) {
 
     const mailer = getMailer()
@@ -17,7 +24,7 @@ function crearCUCancelacionReserva({ ReservasApi}) {
 
             if (cliente) {
                 const reserva = await ReservasApi.getReservaById(idReserva)
-                //const mailPasajero = reserva.mail
+                const mailPasajero = reserva.mail
 
                 //Api borra reserva de DB
                 await ReservasApi.deleteById(idReserva)
@@ -31,7 +38,7 @@ function crearCUCancelacionReserva({ ReservasApi}) {
                 //agregar el pdfAdjunto al sobre e ir construyendolo
                 const sobre = mailer.getSobre()
                 sobre.from()
-                sobre.to()
+                sobre.to(mailPasajero)
                 sobre.title()
                 sobre.text()
                 sobre.addAttachments.push(pdfAdjunto)
