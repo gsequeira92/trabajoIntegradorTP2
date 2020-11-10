@@ -97,9 +97,12 @@ function factoryFactura() {
 
 
 //FACTORY FACTURA CANCELADA
-function factoryFacturaCancelada() {
-    nombreArchivo = `pdfTestFacturaCancelada`;
-    rutaArchivo = `src/servicios/mati/pdfs/`;
+function factoryFacturaCancelada({unNombreArchivo,unaRutaArchivo}) {
+
+    nombreArchivo= unNombreArchivo;
+    rutaArchivo = unaRutaArchivo;
+    //nombreArchivo = `pdfTestFacturaCancelada`;
+    //rutaArchivo = `src/servicios/mati/pdfs/`;
     const objeto = {
         avion:{ "modeloAvion": "BOEING 737 JET",//
                 "numeroAvion": "5312563643",   //

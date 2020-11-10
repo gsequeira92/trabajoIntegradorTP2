@@ -1,14 +1,16 @@
 const { crearTemporizador } = require('../gas/Temporizador')
 const { getMailer } = require('../factorys/factoryMailer.js')
-const { facturaCancelada } = require('../mati/test/appFacturaCancelacionVuelo')
-const { crearDaoCliente } = require('../daos/daoPasajeros')
-const  crearDaoReservas = require('../daos/daoReservas')
+const { factoryFacturaCancelada } = require('../factorys/factoryPdfs.js')
+import fs from 'fs'
 const rutaArchivo = '../mati/pdfs'
 
 
 
 
 function crearCUCancelacionReserva({ ReservasApi}) {
+
+    const mailer = getMailer()
+    const pdfCancelacion = factoryFacturaCancelada()
 
     return {
         execute: async (idCliente, idReserva) => {
@@ -23,10 +25,18 @@ function crearCUCancelacionReserva({ ReservasApi}) {
                 await ReservasApi.deleteById(idReserva)
 
                 //genera PDF con confirmacion de cancelacion
-                pdfCancelacion(`${"cancelacion de reserva" + idReserva}`, rutaArchivo, reserva)
+                pdfCancelacion.factoryFacturaCancelada( `${"cancelacion de reserva" + idReserva}`,rutaArchivo)
 
                 //hay que agregar el pfd como adjunto al sobre del mailer
+                let pdfAdjunto = new Blob(fs.readFile(rutaArchivo,'uft8'), {type:'appication/pdf'})
 
+                //agregar el pdfAdjunto al sobre e ir construyendolo
+                const sobre = mailer.getSobre()
+                sobre.from()
+                sobre.to()
+                sobre.title()
+                sobre.text()
+                sobre.addAttachments.push(pdfAdjunto)
 
                 //mailer deberia incluir el sobre para configurarlos de alguna forma y solo usar sendMail()
                 mailer.sendMail(sobre)
