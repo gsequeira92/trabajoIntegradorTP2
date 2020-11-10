@@ -58,7 +58,11 @@ function notify() {
 
 function getNearDepartureFlights(reservasANotificar) {
 
+    if (reservasANotificar.size <=0) {
+        throw new Error('No hay reservas para notificar/filtrar')
+    }
     return reservasANotificar.filter(e => moment(e.horaPartida).endOf('hors').fromNow() === 2)
+
 }
 
 function programarNotificaciones() {
