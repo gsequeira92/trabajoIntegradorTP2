@@ -2,29 +2,25 @@ const { crearTemporizador } = require('../gas/Temporizador')
 const { getMailer } = require('../factorys/factoryMailer.js')
 const { facturaCancelada } = require('../mati/test/appFacturaCancelacionVuelo')
 const { crearDaoCliente } = require('../daos/daoPasajeros')
-const { crearDaoReservas } = require('../daos/daoReservas')
+const  crearDaoReservas = require('../daos/daoReservas')
 const rutaArchivo = '../mati/pdfs'
 
 
-function crearCUCancelacionReserva({ mailer, tempo, pdfCancelacion, daoReservas, daoClientes }) {
 
-    mailer = getMailer()
-    tempo = crearTemporizador()
-    pdfCancelacion = facturaCancelada()
-    daoReservas = crearDaoReservas()
-    daoClientes = crearDaoCliente()
+
+function crearCUCancelacionReserva({ ReservasApi}) {
 
     return {
         execute: async (idCliente, idReserva) => {
 
-            const cliente = await daoClientes.getById(idCliente)
+            const cliente = await ReservasApi.getByDniPasajero(idCliente)
 
             if (cliente) {
-                const reserva = await daoReservas.getReservaById(idReserva)
+                const reserva = await ReservasApi.getReservaById(idReserva)
                 //const mailPasajero = reserva.mail
 
-                //DAO borra reserva de DB
-                await daoReservas.delete(idReserva)
+                //Api borra reserva de DB
+                await ReservasApi.deleteById(idReserva)
 
                 //genera PDF con confirmacion de cancelacion
                 pdfCancelacion(`${"cancelacion de reserva" + idReserva}`, rutaArchivo, reserva)
