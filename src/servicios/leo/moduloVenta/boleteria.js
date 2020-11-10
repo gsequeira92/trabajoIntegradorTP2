@@ -1,7 +1,7 @@
 // master es el objeto global de parametros
 function crearBoleteriaAvion(master) {
 
-
+    
 
     return {
 

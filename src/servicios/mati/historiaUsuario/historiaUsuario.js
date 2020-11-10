@@ -6,22 +6,25 @@ LA MODIFICACION SERA PARA CAMBIAR LA COMIDA A SIN TACC
 -Enviar por mail
 */
 
-function modificarComidaDeVuelo({ mailer, daoReservas, billeteVuelo }) {
-
-    mailer = getMailer()
-    billeteVuelo = billeteVuelo()
-    daoReservas = crearDaoReservas()
+function modificarComidaDeVuelo({ daoReservas }) {
 
     return {
+        //Recibo el id para identificar de manera unica la reserva, y el boolean para ver si la comida es Sin Tacc
         execute: async (idReserva, boolean) => {
-            //Recibo el id para identificar de manera unica la reserva, y el boolean para ver si la comida es Sin Tacc
-            //verdadero es SIN TACC, falso es CON TACC
-            const reserva = await daoReservas.getById(idReserva)
-            if (reserva) {
-                await daoReservas.modificarComida(boolean) //no es necesario cancelarlo, se modifica directamente
-                billeteVuelo(nombreArchivo, rutaArchivo, objeto)
-                await mailer.enviarMail(idCliente)
+            let reserva = null
+            //const reserva = await daoReservas.getById(idReserva)
+            if (await daoReservas.existeReserva(idReserva)) {
+                reserva = await daoReservas.getReservaById(idReserva)
             }
+            //verdadero es SIN TACC, falso es CON TACC
+            if (!reserva) {
+                await daoReservas.modificarComida(boolean) //no es necesario cancelarlo, se modifica directamente
+                await generarPdfBillete(pasajero.apellido, rutaArchivo, boleto)
+                await mandarBoletoXMail(boleto, rutaArchivo)
+            }else{
+                console.log('Reserva no encontrada')
+            }
+
         }
     }
 }
