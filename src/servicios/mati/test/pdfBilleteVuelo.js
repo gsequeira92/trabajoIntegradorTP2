@@ -39,7 +39,7 @@ const crearContenidoPdfBillete = (objeto) => {
                 body: [
                     [`Sale a la(s) ${objeto.vuelo.horaPartida}`, `Llega a la(s) ${objeto.vuelo.horaArribo}`, `AVION ${objeto.avion.modeloAvión}`],
                     [`${objeto.origen.aeropuerto} ${objeto.origen.nombre}`, `${objeto.destino.aeropuerto} ${objeto.destino.nombre}`, `Millaje: ${objeto.vuelo.millaje}` ],
-                    [`Terminal: ${objeto.origen.terminal}`, `Terminal: ${objeto.destino.terminal}`, '' ]
+                    [`Terminal: ${objeto.origen.terminal}`, `Terminal: ${objeto.destino.terminal}`, `Comida: SIN TACC` ]
                 ]
             }
         },
@@ -53,7 +53,7 @@ const crearContenidoPdfBillete = (objeto) => {
             style: 'Tabla',
             table: {
                 body: [
-                    [`Asiento(s): ${objeto.reserva.nroAsiento} `, `Clase: ${objeto.reserva.clase}`, `Id Reserva: ${objeto.reserva.id}`]
+                    [`Asiento(s): ${objeto.reserva.nroAsiento} `, `Clase: Economica`, `Id Reserva: ${objeto.reserva.id}`]
                 ]
             }
         },
