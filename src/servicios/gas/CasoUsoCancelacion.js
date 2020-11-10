@@ -11,7 +11,7 @@ const rutaArchivo = '../mati/pdfs'
 
 
 
-function crearCUCancelacionReserva({ ReservasApi}) {
+function crearCUCancelacionReserva(ReservasApi) {
 
     const mailer = getMailer()
     const pdfCancelacion = factoryFacturaCancelada()
