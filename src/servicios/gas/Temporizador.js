@@ -1,3 +1,4 @@
+const reservasANotificar = []
 
 function crearTemporizador() {
 
@@ -44,10 +45,21 @@ function crearTemporizador() {
                 console.log(error)
             }
         },
+        crearNotificacionDeVuelo(Reserva) {
+
+            if (!esReservaValida(Reserva)) {
+                throw new Error('Ha intentado agregar notificaciones para una reserva invalida')
+            }
+            reservasANotificar.push(Reserva)
+        },
 
     }
 }
 
+function esReservaValida(unaReserva) {
+
+    return unaReserva !== undefined && !unaReserva.isEmpty
+}
 
 
 function esNombreValido(unNombre) {
@@ -74,4 +86,4 @@ function esIntervaloValido(interval) {
     return valido
 }
 
-module.exports = { crearTemporizador }
+module.exports = { crearTemporizador , reservasANotificar}

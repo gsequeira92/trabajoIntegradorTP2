@@ -4,9 +4,6 @@ const { factoryFacturaCancelada } = require('../factorys/factoryPdfs.js')
 import fs from 'fs'
 const rutaArchivo = '../mati/pdfs'
 
-
-
-
 function crearCUCancelacionReserva({ ReservasApi}) {
 
     const mailer = getMailer()
@@ -45,5 +42,4 @@ function crearCUCancelacionReserva({ ReservasApi}) {
         }
     }
 }
-
 module.exports = { crearCUCancelacionReserva }
