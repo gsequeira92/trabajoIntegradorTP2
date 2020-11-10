@@ -45,7 +45,7 @@ function crearCUCancelacionReserva(ReservasApi) {
 
                 //mailer deberia incluir el sobre para configurarlos de alguna forma y solo usar sendMail()
                 mailer.sendMail(sobre)
-                tempo.cancelarEventoRecurrente(idReserva)
+                tempo.cancelarNotificacionVuelo(idReserva)
             }
         }
     }
