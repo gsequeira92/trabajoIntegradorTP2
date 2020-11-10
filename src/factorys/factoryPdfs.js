@@ -4,9 +4,12 @@ const { generarFacturaCancelada } = require("./appFacturaCancelacionVuelo");
 
 //FACTORY BILLETE VUELO
 
-function factoryBilleteVuelo() {
-    nombreArchivo = `pdfTestBillete`;
-    rutaArchivo = `src/servicios/mati/pdfs/`;
+function factoryBilleteVuelo({unNombreArchivo,unaRutaArchivo}) {
+    
+    nombreArchivo= unNombreArchivo;
+    rutaArchivo = unaRutaArchivo;
+    //nombreArchivo = `pdfTestFacturaCancelada`;
+    //rutaArchivo = `src/servicios/mati/pdfs/`;
     const objeto = {
         avion: {
             "modeloAvion": "BOEING 737 JET",//
@@ -54,9 +57,12 @@ function factoryBilleteVuelo() {
 }
 
 //FACTORY FACTURA
-function factoryFactura() {
-    nombreArchivo = `pdfTestFactura`;
-    rutaArchivo = `src/servicios/mati/pdfs/`;
+function factoryFactura({unNombreArchivo,unaRutaArchivo}) {
+    
+    nombreArchivo= unNombreArchivo;
+    rutaArchivo = unaRutaArchivo;
+    //nombreArchivo = `pdfTestFacturaCancelada`;
+    //rutaArchivo = `src/servicios/mati/pdfs/`;
     const objeto = {
         avion:{ "modeloAvion": "BOEING 737 JET",//
                 "numeroAvion": "5312563643",   //

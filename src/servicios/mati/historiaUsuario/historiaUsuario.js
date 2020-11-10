@@ -17,7 +17,7 @@ function modificarComidaDeVuelo(ReservasApi) {
             if (!reserva) {
                 //verdadero es SIN TACC, falso es CON TACC
                 await ReservasApi.modificarComida(reserva, boolean) //no es necesario cancelarlo, se modifica directamente la misma reserva
-                await generarPdfBillete(pasajero.apellido, rutaArchivo, boleto)
+                await generarPdfBillete(pasajero.apellido, rutaArchivo, objeto)
                 await mandarBoletoXMail(boleto, rutaArchivo)
             }else{
                 console.log('Reserva no encontrada')
