@@ -29,7 +29,7 @@ const crearContenidoPdfBillete = (objeto) => {
             style: "pequeniolabel"
         },
         {
-            text: `AEROLINEAS MARIAN C.A. S.P.A.\n NRO VUELO: ${objeto.reserva.vuelo}\n DURACION: ${objeto.vuelo.duracion}hrs\n`,
+            text: `AEROLINEAS MARIAN C.A. S.P.A.\n NRO VUELO: ${objeto.reserva.idVuelo}\n DURACION: ${objeto.vuelo.duracion}hrs\n`,
             style: "label"
         },
         "\n\n",
@@ -37,9 +37,9 @@ const crearContenidoPdfBillete = (objeto) => {
             style: 'Tabla',
             table: {
                 body: [
-                    [`Sale a la(s) ${objeto.vuelo.horaPartida}`, `Llega a la(s) ${objeto.vuelo.horaArribo}`, `AVION ${objeto.avion.modeloAvión}`],
-                    [`${objeto.origen.aeropuerto} ${objeto.origen.nombre}`, `${objeto.destino.aeropuerto} ${objeto.destino.nombre}`, `Millaje: ${objeto.vuelo.millaje}` ],
-                    [`Terminal: ${objeto.origen.terminal}`, `Terminal: ${objeto.destino.terminal}`, `Comida: SIN TACC` ]
+                    [`Sale a la(s) ${objeto.vuelo.horaPartida}`, `Llega a la(s) ${objeto.vuelo.horaLlegada}`, `AVION ${objeto.avion.modeloAvion}`],
+                    [`${objeto.aeropuerto1.codigo} ${objeto.aeropuerto1.ciudad}`, `${objeto.aeropuerto2.codigo} ${objeto.aeropuerto2.ciudad}`, `Millaje: ${objeto.vuelo.millaje}` ],
+                    [`Terminal: ${objeto.aeropuerto1.terminal}`, `Terminal: ${objeto.aeropuerto2.terminal}`, `Comida SIN TACC ${objeto.reserva.comidaSinTacc}` ]
                 ]
             }
         },
@@ -53,7 +53,7 @@ const crearContenidoPdfBillete = (objeto) => {
             style: 'Tabla',
             table: {
                 body: [
-                    [`Asiento(s): ${objeto.reserva.nroAsiento} `, `Clase: Economica`, `Id Reserva: ${objeto.reserva.id}`]
+                    [`Asiento(s): ${objeto.reserva.asiento} `, `Clase: Economica`, `Id Reserva: ${objeto.reserva.idReserva}`]
                 ]
             }
         },

@@ -3,17 +3,17 @@ const { generarFactura } = require("./appFacturaVuelo");
 //const { generarFacturaCancelada } = require("./appFacturaCancelacionVuelo");
 
 const objeto = {
-    avion:{ "modeloAvión": "BOEING 737 JET",
+    avion:{ "modeloAvion": "BOEING 737 JET",
             "numeroAvion": "5312563643",   
             "capacidad":  "132"
     },
-    reserva:{ "id" : "49284934",
-              "vuelo" : "2938",
+    reserva:{ "idReserva" : "1",
+              "idVuelo" : "2938",
               "destino" : "NYC New York, United States",
               "origen" : "EZE Buenos Aires, Argentina",
-              "cantAsientos" : "1",
-              "nroAsiento" : "40H",
-              "clase" : "economica"
+              "asiento" : "40H",
+              "clase" : "economica",
+              "comidaSinTacc" : "NO"
     },
     pasajero:{ "nombre": "Pepe Carlos",
                "apellido" : "Argento", 
@@ -21,21 +21,25 @@ const objeto = {
                "email" : "pepeargento@gmail.com"
 },
      vuelo:{
-            "precio":"$120.382,00", 
+            "precio":"120.382,00", 
             "duracion":"11:00",
             "partida":"JUEVES 04 SEPTIEMBRE",
             "arribo" : "VIERNES 05 SEPTIEMBRE",
             "horaPartida" : "12:50 PM",
-            "horaArribo" : "4:15 AM",
-            "millaje" : "8.720 km"
+            "horaLlegada" : "4:15 AM",
+            "millaje" : "8.720 km",
+            "idAeropuerto1" : "23",
+            "idAeropuerto2" : "18"
 },
-    destino:{"nombre":"Nueva York, United States", 
+    aeropuerto2:{
+            "nombre":"Nueva York, United States", 
             "aeropuerto": "JFK",
             "terminal" : "3"
 },
-    origen:{"nombre":"Buenos Aires, Argentina", 
-             "aeropuerto": "EZE",
-             "terminal" : "C"
+    aeropuerto1:{
+            "ciudad":"Buenos Aires, Argentina", 
+            "codigo": "EZE",
+            "terminal" : "C"
 }}
 
 //nombreArchivo = `pdfTestBillete`;

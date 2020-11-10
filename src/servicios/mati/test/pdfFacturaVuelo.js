@@ -33,7 +33,7 @@ const crearContenidoPdfBillete = (objeto) => {
 				{
 					ul: [
 						`Email: ${objeto.pasajero.email}`,
-						`ID Reserva: ${objeto.reserva.id}`,
+						`ID Reserva: ${objeto.reserva.idReserva}`,
 					]
 				}
 			]
@@ -43,7 +43,7 @@ const crearContenidoPdfBillete = (objeto) => {
             style: "pequeniolabel"
         },
         {
-            text: `AEROLINEAS MARIAN C.A. S.P.A.\n NRO VUELO: ${objeto.reserva.vuelo}\n DURACION: ${objeto.vuelo.duracion}hrs\n`,
+            text: `AEROLINEAS MARIAN C.A. S.P.A.\n NRO VUELO: ${objeto.reserva.idVuelo}\n DURACION: ${objeto.vuelo.duracion}hrs\n`,
             style: "label"
         },
         "\n\n",
@@ -52,13 +52,13 @@ const crearContenidoPdfBillete = (objeto) => {
 			table: {
 				body: [
 					['Descripcion','Cantidad Asientos', 'Precio'],
-                    [`Vuelo Aerolineas Marian ${objeto.origen.aeropuerto}-${objeto.destino.aeropuerto}`, `${objeto.reserva.cantAsientos}`, `${objeto.vuelo.precio}` ]
+                    [`Vuelo Aerolineas Marian ${objeto.aeropuerto1.codigo}-${objeto.aeropuerto2.codigo}`, `1`, '$'`${objeto.vuelo.precio}` ]
 				]
 			}
         },
         "\n\n",
         {
-            text: `Nro Avion: ${objeto.avion.numeroAvion}\n Modelo: ${objeto.avion.modeloAvión}\n`,
+            text: `Nro Avion: ${objeto.avion.numeroAvion}\n Modelo: ${objeto.avion.modeloAvion}\n`,
             style: "label"
         },
         "\n\n",
@@ -66,8 +66,8 @@ const crearContenidoPdfBillete = (objeto) => {
 			style: 'Tabla',
 			table: {
 				body: [
-                    [`Asiento(s): ${objeto.reserva.nroAsiento} `, `Clase: ${objeto.reserva.clase}`, `Id Reserva: ${objeto.reserva.id}`],
-                    [`Origen: ${objeto.origen.nombre}`, `Destino: ${objeto.origen.nombre}`, 'Estado de vuelo: CONFIRMADO']
+                    [`Asiento(s): ${objeto.reserva.asiento} `, `Clase: Economica`, `Id Reserva: ${objeto.reserva.idReserva}`],
+                    [`Origen: ${objeto.reserva.origen}`, `Destino: ${objeto.reserva.destino}`, 'Estado de vuelo: CONFIRMADO']
 				]
 			}
         },
