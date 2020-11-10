@@ -1,4 +1,6 @@
 const moment = require('moment')
+const { reservasANotificar } = require('../gas/Temporizador')
+
 //cambiar de estructura
 //daoVuelos maneja vuelos para filtrar
 //intervalo 1 vez por hora, ese intervalo trae a los vuelos que tienen que ser notificados y marcarlos como ejecutado.
@@ -49,7 +51,7 @@ function flightNotificationsQueue() {
     }
 }
 
-const reservasANotificar = []
+
 
 function notify() {
 
@@ -58,7 +60,11 @@ function notify() {
 
 function getNearDepartureFlights(reservasANotificar) {
 
+    if (reservasANotificar.size <= 0) {
+        throw new Error('No hay reservas para notificar/filtrar')
+    }
     return reservasANotificar.filter(e => moment(e.horaPartida).endOf('hors').fromNow() === 2)
+
 }
 
 function programarNotificaciones() {

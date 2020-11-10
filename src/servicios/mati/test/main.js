@@ -32,8 +32,8 @@ const objeto = {
             "idAeropuerto2" : "18"
 },
     aeropuerto2:{
-            "nombre":"Nueva York, United States", 
-            "aeropuerto": "JFK",
+            "ciudad":"Nueva York, United States", 
+            "codigo": "JFK",
             "terminal" : "3"
 },
     aeropuerto1:{

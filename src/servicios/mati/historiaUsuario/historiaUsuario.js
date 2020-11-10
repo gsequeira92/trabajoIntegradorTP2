@@ -6,19 +6,17 @@ LA MODIFICACION SERA PARA CAMBIAR LA COMIDA A SIN TACC
 -Enviar por mail
 */
 
-function modificarComidaDeVuelo({ daoReservas }) {
+function modificarComidaDeVuelo(ReservasApi) {
 
     return {
         //Recibo el id para identificar de manera unica la reserva, y el boolean para ver si la comida es Sin Tacc
-        execute: async (idReserva, boolean) => {
+        cambioDeComida: async (idReserva, boolean) => {
             let reserva = null
-            //const reserva = await daoReservas.getById(idReserva)
-            if (await daoReservas.existeReserva(idReserva)) {
-                reserva = await daoReservas.getReservaById(idReserva)
-            }
-            //verdadero es SIN TACC, falso es CON TACC
+            reserva = await ReservasApi.getById(idReserva)
+            
             if (!reserva) {
-                await daoReservas.modificarComida(boolean) //no es necesario cancelarlo, se modifica directamente
+                //verdadero es SIN TACC, falso es CON TACC
+                await ReservasApi.modificarComida(reserva, boolean) //no es necesario cancelarlo, se modifica directamente la misma reserva
                 await generarPdfBillete(pasajero.apellido, rutaArchivo, boleto)
                 await mandarBoletoXMail(boleto, rutaArchivo)
             }else{

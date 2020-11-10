@@ -1,36 +1,47 @@
 const { crearTemporizador } = require('../gas/Temporizador')
 const { getMailer } = require('../factorys/factoryMailer.js')
-const { facturaCancelada } = require('../mati/test/appFacturaCancelacionVuelo')
-const { crearDaoCliente } = require('../daos/daoPasajeros')
-const { crearDaoReservas } = require('../daos/daoReservas')
+const { factoryFacturaCancelada } = require('../factorys/factoryPdfs.js')
+import fs from 'fs'
 const rutaArchivo = '../mati/pdfs'
 
+//los factories se usan asi?
+//Armar sobre por partespara enviar mail
+//Blob para enviar el pdf?
+//De donde sale reservas api??
 
-function crearCUCancelacionReserva({ mailer, tempo, pdfCancelacion, daoReservas, daoClientes }) {
 
-    mailer = getMailer()
-    tempo = crearTemporizador()
-    pdfCancelacion = facturaCancelada()
-    daoReservas = crearDaoReservas()
-    daoClientes = crearDaoCliente()
+
+function crearCUCancelacionReserva({ ReservasApi}) {
+
+    const mailer = getMailer()
+    const pdfCancelacion = factoryFacturaCancelada()
+    const tempo = crearTemporizador()
 
     return {
         execute: async (idCliente, idReserva) => {
 
-            const cliente = await daoClientes.getById(idCliente)
+            const cliente = await ReservasApi.getByDniPasajero(idCliente)
 
             if (cliente) {
-                const reserva = await daoReservas.getReservaById(idReserva)
-                //const mailPasajero = reserva.mail
+                const reserva = await ReservasApi.getReservaById(idReserva)
+                const mailPasajero = reserva.mail
 
-                //DAO borra reserva de DB
-                await daoReservas.delete(idReserva)
+                //Api borra reserva de DB
+                await ReservasApi.deleteById(idReserva)
 
                 //genera PDF con confirmacion de cancelacion
-                pdfCancelacion(`${"cancelacion de reserva" + idReserva}`, rutaArchivo, reserva)
+                pdfCancelacion.factoryFacturaCancelada( `${"cancelacion de reserva" + idReserva}`,rutaArchivo)
 
                 //hay que agregar el pfd como adjunto al sobre del mailer
+                let pdfAdjunto = new Blob(fs.readFile(rutaArchivo,'uft8'), {type:'appication/pdf'})
 
+                //agregar el pdfAdjunto al sobre e ir construyendolo
+                const sobre = mailer.getSobre()
+                sobre.from()
+                sobre.to(mailPasajero)
+                sobre.title()
+                sobre.text()
+                sobre.addAttachments.push(pdfAdjunto)
 
                 //mailer deberia incluir el sobre para configurarlos de alguna forma y solo usar sendMail()
                 mailer.sendMail(sobre)
@@ -39,5 +50,4 @@ function crearCUCancelacionReserva({ mailer, tempo, pdfCancelacion, daoReservas,
         }
     }
 }
-
 module.exports = { crearCUCancelacionReserva }

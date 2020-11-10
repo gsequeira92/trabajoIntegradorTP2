@@ -29,6 +29,9 @@ async function crearReservaDaoMemoria() {
         getByDniPasajero: async (dni_pasajero) => {
             return elementos.filter(e => e.dniPasajero === dni_pasajero)
         },
+        getByDniPasajero: async (id_pasajero) => {
+            return elementos.filter(e => e.idPasajero === id_pasajero)
+        },
         getByIdVuelo: async (id_vuelo) => {
             return elementos.filter(e => e.idVuelo === id_vuelo)
         },
