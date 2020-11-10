@@ -9,6 +9,11 @@ function crearReservaApi(reservasDao) {
             return reserva
         },
 
+        modificarComida: async (dato, bool) => {
+            modificarComida(reserva,bool)
+           // return reserva
+        },
+
         getAll: async () => {
             reserva = await reservasDao.getAll()
             return reserva
@@ -43,6 +48,13 @@ function crearIdValido(dato) {
         throw crearErrorArgumentosInvalidos('el id de la reserva debe ser numerico')
     }
     return idNumerico
+}
+
+function modificarComida(reserva, bool){
+    //if (isNaN(reserva)) {
+      //  throw crearErrorArgumentosInvalidos('reserva no encontrada')
+   // }
+    reserva.comidaSinTacc = bool
 }
 
 module.exports = { crearReservaApi }
