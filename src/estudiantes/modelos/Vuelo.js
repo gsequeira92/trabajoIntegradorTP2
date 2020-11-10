@@ -64,6 +64,26 @@ function crearVuelo(objeto) {
         vuelo.numeroAvion = objeto.numeroAvion
     }
 
+    if (!objeto.horaPartida) {
+        throw crearErrorArgumentosInvalidos('horaPartida', 'campo requerido')
+    }
+
+    if (isNaN(parseInt(objeto.horaPartida))) {
+        throw crearErrorArgumentosInvalidos('horaPartida', 'debe contener unicamente caracteres numericos')
+    } else {
+        vuelo.horaPartida = objeto.horaPartida
+    }
+
+    if (!objeto.horaLlegada) {
+        throw crearErrorArgumentosInvalidos('horaLlegada', 'campo requerido')
+    }
+
+    if (isNaN(parseInt(objeto.horaLlegada))) {
+        throw crearErrorArgumentosInvalidos('horaLlegada', 'debe contener unicamente caracteres numericos')
+    } else {
+        vuelo.horaLlegada = objeto.horaLlegada
+    }
+
     if (!objeto.id) {
     vuelo.id = nextId++
     } else {
