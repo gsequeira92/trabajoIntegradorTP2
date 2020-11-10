@@ -52,6 +52,13 @@ function crearTemporizador() {
             }
             reservasANotificar.push(Reserva)
         },
+        cancelarNotificacionReserva(Reserva){
+            if(!esReservaValida(Reserva)){
+                throw new Error('Ha intentado cancelar para una reserva invalida')
+            }
+            reservasANotificar.pop(Reserva)
+        }
+
 
     }
 }

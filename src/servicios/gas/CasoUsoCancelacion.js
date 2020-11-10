@@ -8,6 +8,7 @@ function crearCUCancelacionReserva({ ReservasApi}) {
 
     const mailer = getMailer()
     const pdfCancelacion = factoryFacturaCancelada()
+    const tempo = crearTemporizador()
 
     return {
         execute: async (idCliente, idReserva) => {
