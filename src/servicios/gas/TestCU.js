@@ -1,5 +1,4 @@
-const { cancelarReservaVuelo } = require('../gas/CasoUsoCancelacion')
-
+const { cancelarReservaVuelo } = require('./CasoUsoCancelacion')
 
 try {
     const cancelacionCU = cancelarReservaVuelo(reservasApi)

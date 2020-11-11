@@ -12,7 +12,6 @@ function crearAvion(objeto) {
         avion.modeloAvion = objeto.modeloAvion
     }
 
-
     if (!objeto.numeroAvion) {
         throw crearErrorArgumentosInvalidos('numero Avion', 'campo requerido')
     }

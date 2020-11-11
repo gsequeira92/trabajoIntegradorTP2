@@ -1,53 +1,43 @@
-const { crearTemporizador } = require('../gas/Temporizador')
-const { getMailer } = require('../factorys/factoryMailer.js')
-const { factoryFacturaCancelada } = require('../factorys/factoryPdfs.js')
-import fs from 'fs'
-const rutaArchivo = '../mati/pdfs'
+//armar cu con nuevas dependencias -DONE
+//no validar cliente -DONE
+//El mail del cliente o de la reserva? definir -DONE : Reserva
+//Notificaciones se guardan en un DAO exclusivo o se agregan a la reserva?--DONE DAO
+//Dividir gestor de notificaciones del Temporizador- DONE
 
-//los factories se usan asi?
-//Armar sobre por partespara enviar mail
-//Blob para enviar el pdf?
-//De donde sale reservas api??
+//Ver si tienen superclase o interface que los usa juntos
+//Checkear Dao's para ver que tienen sus funciones
 
-
-
-function crearCUCancelacionReserva(ReservasApi) {
-
-    const mailer = getMailer()
-    const pdfCancelacion = factoryFacturaCancelada()
-    const tempo = crearTemporizador()
+function crearCUCancelacionReserva({ daoReservas, mailer, factoryFacturaCancelada, gestorNotificaciones }) {
 
     return {
         execute: async (idCliente, idReserva) => {
 
-            const cliente = await ReservasApi.getByDniPasajero(idCliente)
+            if (await daoReservas.getReservaById(idReserva)) {
+                const mailPasajero = await daoReservas.getEmailPasajero(idCliente)
 
-            if (cliente) {
-                const reserva = await ReservasApi.getReservaById(idReserva)
-                const mailPasajero = reserva.mail
-
-                //Api borra reserva de DB
-                await ReservasApi.deleteById(idReserva)
+                //Dao borra reserva de DB
+                await daoReservas.deleteById(idReserva)
 
                 //genera PDF con confirmacion de cancelacion
-                pdfCancelacion.factoryFacturaCancelada( `${"cancelacion de reserva" + idReserva}`,rutaArchivo)
-
-                //hay que agregar el pfd como adjunto al sobre del mailer
-                let pdfAdjunto = new Blob(fs.readFile(rutaArchivo,'uft8'), {type:'appication/pdf'})
-
+                factoryFacturaCancelada(`${"cancelacion de reserva nro: " + idReserva}`, rutaArchivo)
+               
                 //agregar el pdfAdjunto al sobre e ir construyendolo
                 const sobre = mailer.getSobre()
-                sobre.from()
+                sobre.from(mailer.from)
                 sobre.to(mailPasajero)
-                sobre.title()
-                sobre.text()
-                sobre.addAttachments.push(pdfAdjunto)
+                sobre.title("cancelacion de reserva")
+                sobre.text("Le informamos respecto de su cancelacion")
+                sobre.addAttachments(rutaArchivo)
 
                 //mailer deberia incluir el sobre para configurarlos de alguna forma y solo usar sendMail()
                 mailer.sendMail(sobre)
-                tempo.cancelarNotificacionVuelo(idReserva)
+                //desuscribir
+                gestorNotificaciones.cancelarNotificacionVuelo(idReserva)
             }
+
         }
     }
+
 }
+ //let pdfAdjunto = new Blob(fs.readFile(rutaArchivo, 'uft8'), { type: 'application/pdf' })
 module.exports = { crearCUCancelacionReserva }

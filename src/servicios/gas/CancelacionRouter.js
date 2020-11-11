@@ -7,8 +7,8 @@ function aerolineasRouter({ aplicacion }) {
     //esta api se va a encargar de borrar la reserva del DAO (apiAerolineas.deleteById(id))
     const apiAerolineas = aplicacion
 
-    router.delete('/api/:id', async (req, res) => {
-        await apiAerolineas.deleteById(req.params.id)
+    router.delete('/reservas/:id', async (req, res) => {
+        await apiAerolineas.deleteReservaById(req.params.id)
         res.status(204).json()
     })
 

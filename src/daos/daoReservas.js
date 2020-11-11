@@ -35,6 +35,10 @@ async function crearReservaDaoMemoria() {
         getByIdVuelo: async (id_vuelo) => {
             return elementos.filter(e => e.idVuelo === id_vuelo)
         },
+        getEmailPasajero: async (id_pasajero) => {
+            const pasajero = getByDniPasajero(id_pasajero)
+            return pasajero.email
+        },
         deleteByIdReserva: async (unId) => {
             const indiceParaBorrar = elementos.findIndex(e => e.idReserva == unId)
             if (indiceParaBorrar === -1) {
