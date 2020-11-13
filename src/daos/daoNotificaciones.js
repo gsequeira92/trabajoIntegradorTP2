@@ -19,7 +19,7 @@ async function crearDaoNotificaciones() {
             if(!notificacionBuscada){
                 throw crearErrorRecursoNoEncontrado('notificacion con id: ', unId)
             }
-            return noti
+            return notificacionBuscada
         },
         deleteById: async (unId) => {
             const indiceABorrar = elementos.findIndex(e => e.id === unId)
