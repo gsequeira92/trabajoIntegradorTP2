@@ -1,6 +1,5 @@
 //import : preguntar marian
 
-
 function crearVentaApi({crearBoleteriaAvion}){
 
     const boleteria = crearBoleteriaAvion(dao1,dao2,mailer,notificador )
@@ -16,6 +15,6 @@ function crearVentaApi({crearBoleteriaAvion}){
 
 }
 
-module.exports {
+module.exports = {
     crearVentaApi
 }
