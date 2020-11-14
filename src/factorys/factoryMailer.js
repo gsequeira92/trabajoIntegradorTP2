@@ -18,11 +18,16 @@ function factoryMailer() {
         },
 
         // usar DTO, siento que esto se repite mucho en el servicio/mailer
-        getSobre: (objeto) => {
+        getSobre: ({mail,asunto, texto, pdf}) => {
             const sobre = {
                 from: credencial.user,
-                to: objeto.mail
-                // porque aca tengo que poner los textos del mail , tiene senti
+                to: mail,
+                subject: asunto,
+                text: texto,
+                attachments: [
+                    {
+                        path: pdf
+                    }]
             }
             return sobre 
 

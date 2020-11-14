@@ -15,8 +15,8 @@ function crearPasajerosApi(pasajerosDao) {
         },
 
    
-        create: async (datos) => {
-            const pasajero = crearEstudiante(datos)
+        agregarPasajero: async (datos) => {
+            const pasajero = crearPasajero(datos)
             await pasajerosDao.addUnique(pasajero, 'dni')
             return pasajero
         },
@@ -33,7 +33,7 @@ function crearPasajerosApi(pasajerosDao) {
             await pasajerosDao.updateById(pasajero)
             return pasajero
         },
-        exist: async (dato) => {
+        existePasajero: async (dato) => {
             const existe = false
 
             const pasajero =  await pasajerosDao.getByDni(dato)
@@ -44,9 +44,7 @@ function crearPasajerosApi(pasajerosDao) {
             return existe
 
         },
-        agregarPasajero: async (datos) => {
-            await pasajerosDao.addUnique(pasajero, 'dni')
-        }
+     
 
 
     }

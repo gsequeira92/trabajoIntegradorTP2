@@ -15,12 +15,9 @@ function creaVuelosApi(vueloDao) {
         },
 
         getAsientoDisponible: async (datos) => {
-            const idVuelo = crearIdValido(datos)
-            vuelo = await vueloDao.getById(idVuelo)
-            vuelo
-            return vuelo
+         // esto  lo tengo que repensar
         },
-        //esto no se si anda
+   
         create: async (datos) => {
             const vuelo = crearVuelo(datos)
             await vueloDao.addUnique(vuelo, 'id')

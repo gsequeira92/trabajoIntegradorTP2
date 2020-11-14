@@ -1,6 +1,32 @@
 
-const {factoryMailer} = require ('../../../factorys/factoryMailer.js')
+const { factoryMailer } = require('../../../factorys/factoryMailer.js')
+const { factoryBilleteVuelo } = require('../../../factorys/factoryPdfs.js')
 const { crearBoleteriaAvion } = require('./boleteria.js')
+const { crearPasajerosApi } = require('../../../estudiantes/aplicacion/PasajerosApi')
+const { crearVueloApi } = require('../../../estudiantes/aplicacion/VuelosApi')
+const { crearReservaApi } = require('../../../estudiantes/aplicacion/ReservasApi')
+const { crearTemporizador } = require('../../gas/Temporizador.js')
+
+
+
+
+const master = {}
+master.pasajeroApi =  crearPasajerosApi(),
+master.vueloApi =  crearVueloApi()
+master.reservaApi = crearReservaApi(),
+master.mailer = factoryMailer(),
+master.pdf = factoryBilleteVuelo(),
+master.notificador = crearTemporizador()
+
+
+
+try {
+    const boleteria = crearBoleteriaAvion(master)
+     dtoVenta =  creardtoVenta( cliente.id, vuelo_id)
+    await boleteria.venderBoleto(dtoVenta)
+} catch (e) {
+    console.log(e.message)
+}
 
 
 /*
@@ -20,27 +46,5 @@ const vuelo = {
     vuelo_id: '28'
 }
 */
-
-// CREAR MASTER UTILIZANDO EL FACTORY -> dao pasajero/vuelo/boleto, mailer, pdfFactura, notificador
-master {
-   pasajeroApi
-   pasajeroApi
-   pasajeroApi
-   mailer =
-
-}
-
-
-try {
-    const boleteria = crearBoleteriaAvion()
-    const datos = {
-        cliente : 
-        vuelo
-    }
-    await boleteria.venderBoleto(clienteNuevo, vuelo.vuelo_id)
-} catch (e) {
-    console.log(e.message) // esto esta bien?
-}
-
 
 
