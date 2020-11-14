@@ -15,6 +15,6 @@ function crearVentaRouter({ crearApiVenta }) {
     })
 }
 
-module.exports {
+module.exports ={
     crearVentaRouter
 }
