@@ -2,7 +2,7 @@ const { MongoClient } = require('mongodb')
 const { crearReserva } = require('/src/estudiantes/modelos/Reserva.js')
 const { crearErrorRecursoNoEncontrado, crearErrorArgumentosInvalidos, crearErrorDeBaseDeDatos
 } = require('../../compartido/errores/ApiError.js')
-const config = require('../../config/config.js')
+const config = require('../../config/config.js.')
 
 function log(line) {
     if (config.isLogEnabled()) console.log(line)
