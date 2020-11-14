@@ -17,7 +17,10 @@ function crearGestorNotificaciones(daoNotificaciones) {
                 throw new Error('Ha intentado cancelar para una reserva invalida')
             }
             daoNotificaciones.deleteById(Reserva.id)
-        }
+        },
+        obtenerSuscriptos(){
+           return await daoNotificaciones.getAll()
+        },
 
     }
 

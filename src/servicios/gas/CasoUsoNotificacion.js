@@ -1,5 +1,6 @@
 const moment = require('moment')
 
+
 //daoVuelos maneja vuelos para filtrar
 //intervalo 1 vez por hora, ese intervalo trae a los vuelos que tienen que ser notificados y marcarlos como ejecutado.
 //map-reduce mongoDb (Indices!)

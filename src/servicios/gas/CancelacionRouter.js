@@ -8,6 +8,7 @@ function aerolineasRouter({ aplicacion }) {
     const apiAerolineas = aplicacion
 
     router.delete('/reservas/:id', async (req, res) => {
+        
         await apiAerolineas.deleteReservaById(req.params.id)
         res.status(204).json()
     })
