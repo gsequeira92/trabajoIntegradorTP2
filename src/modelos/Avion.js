@@ -1,4 +1,4 @@
-const { crearErrorArgumentosInvalidos } = require('../../compartido/errores/ApiError.js')
+const { crearErrorArgumentosInvalidos } = require('../compartido/errores/ApiError.js')
 
 let nextId = 1
 

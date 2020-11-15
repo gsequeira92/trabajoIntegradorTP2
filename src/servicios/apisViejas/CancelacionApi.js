@@ -1,4 +1,4 @@
-const cancelacionFactory = require('../factorys/CuCancelacionFactory')
+const cancelacionFactory = require('../../factorys/CuCancelacionFactory')
 
 const cuCancelacion = cancelacionFactory.getCuCancelacion()
 
