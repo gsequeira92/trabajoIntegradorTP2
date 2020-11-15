@@ -4,7 +4,7 @@ const { generarFacturaCancelada } = require("./appFacturaCancelacionVuelo");
 
 //FACTORY BILLETE VUELO
 
-function factoryBilleteVuelo({unNombreArchivo,unaRutaArchivo}) {
+function factoryBilleteVuelo({unNombreArchivo,unaRutaArchivo, objeto}) {
     
     nombreArchivo= unNombreArchivo;
     rutaArchivo = unaRutaArchivo;

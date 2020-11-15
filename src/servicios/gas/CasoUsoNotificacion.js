@@ -6,6 +6,39 @@ const moment = require('moment')
 //map-reduce mongoDb (Indices!)
 //Query en db para obtener eventos en el tiempo
 
+function crearCUNotificacion({,gestorNotificaciones,Temporizador }) {
+
+    return {
+        execute: async (idCliente, idReserva) => {
+
+            if (await ReservaDb.getReservaById(idReserva)) {
+                const mailPasajero = await daoReservas.getEmailPasajero(idCliente)
+
+                //Dao borra reserva de DB
+                await ReservaDb.deleteById(idReserva)
+
+                //genera PDF con confirmacion de cancelacion
+                factoryFacturaCancelada(`${"cancelacion de reserva nro: " + idReserva}`, rutaArchivo)
+               
+                //agregar el pdfAdjunto al sobre e ir construyendolo
+                const sobre = mailer.getSobre()
+                sobre.from(mailer.from)
+                sobre.to(mailPasajero)
+                sobre.title("cancelacion de reserva")
+                sobre.text("Le informamos respecto de su cancelacion")
+                sobre.addAttachments(rutaArchivo)
+
+                //mailer deberia incluir el sobre para configurarlos de alguna forma y solo usar sendMail()
+                mailer.sendMail(sobre)
+                //desuscribir
+                gestorNotificaciones.cancelarNotificacionVuelo(idReserva)
+            }
+
+        }
+    }
+
+}
+
 function flightNotificationsQueue() {
 
     this.dataStore = Array.prototype.slice.call(arguments, 0);
@@ -63,6 +96,7 @@ function getNearDepartureFlights() {
     return reservasANotificar.filter(e => moment(e.horaPartida).endOf('hors').fromNow() === 2)
 
 }
+
 
 function programarNotificaciones() {
 

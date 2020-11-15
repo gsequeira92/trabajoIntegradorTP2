@@ -1,16 +1,24 @@
 const express = require('express')
+const cancelacionApi = require('../apis/CancelacionApi')
 
 //tiene que recibir la api por parametro y asignarla despues a una constante para usar
-function aerolineasRouter({ aplicacion }) {
+function aerolineasRouter({ cancelacionApi }) {
 
     const router = express.Router()
     //esta api se va a encargar de borrar la reserva del DAO (apiAerolineas.deleteById(id))
-    const apiAerolineas = aplicacion
+    const apiAerolineas = cancelacionApi
 
     router.delete('/reservas/:id', async (req, res) => {
-        
-        await apiAerolineas.deleteReservaById(req.params.id)
-        res.status(204).json()
+
+        try {
+            await apiAerolineas.cancelarVuelo(req.params.id)
+            res.status(204).json()
+        } catch (error) {
+            const mensajeError =  res.statusMessage()
+            console.log(mensajeError, error.getMessage())
+            res.status(res.statusCode).json()
+        }
+
     })
 
 }
