@@ -1,11 +1,11 @@
 //import : preguntar marian
 const { factoryCU } = require ('../../../factorys/factoryCU.js')
-const {CuFactory} = require('../factorys/CuCancelacionFactory')
 
 function crearAerolineaApi(){
 
     const CU_Venta = factoryCU().getCU_Venta() 
     const CU_Cancelacion = factoryCU().getCU_Cancelacion()
+    const CU_ModificacionComida = factoryCU().getCU_ModificacionComida()
 
     return{
         venderPasaje: ({idPasajero, idVuelo}) =>{
@@ -15,11 +15,14 @@ function crearAerolineaApi(){
         cancelarReserva: (idReserva) =>{
             return CU_Cancelacion.execute(idReserva)
         },
+        modificarComida: (idReserva, comidaSinTacc) =>{
+            return CU_ModificacionComida.cambioDeComida(idReserva, comidaSinTacc)
+        },
         
     }
 
 }
 
 module.exports = {
-    crearVentaApi
+    crearAerolineaApi
 }
