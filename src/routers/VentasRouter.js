@@ -1,17 +1,15 @@
 const express = require('express')
 
-function crearVentaRouter({ crearApiVenta }) {
+function crearVentaRouter({ crearApiAerolinea }) {
 
-    const apiVenta = crearApiVenta()
+    const apiAerolinea = crearApiAerolinea()
     router = express.Router()
 
-    router.post('/ventas/??', async (req, res) => {
-        try {
-            const algo = await apiVenta.venderPasaje(req.body)
-            res.status(204).json()
-        } catch (e) {
-            res.status(e.getMessage).json()
-        }
+    router.post('/ventas', async (req, res) => {
+       
+            const reserva = await apiAerolinea.venderPasaje(req.body)
+            res.status(201).json(reserva)
+     
     })
 }
 

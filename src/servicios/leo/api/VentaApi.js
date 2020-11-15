@@ -1,15 +1,14 @@
 //import : preguntar marian
+const { factoryCU } = require ('../../../factorys/factoryCU.js')
 
+function crearVentaApi(){
 
-function crearVentaApi({crearBoleteriaAvion}){
+    const CU_Venta = factoryCU().getCU_Venta() 
 
-    const boleteria = crearBoleteriaAvion(dao1,dao2,mailer,notificador )
-    
     return{
         venderPasaje: ({idPasajero, idVuelo}) =>{
-            boleteria.venderBoleto({idPasajero, idVuelo})
-
-            // return reserva
+            return  CU_Venta.venderBoleto({idPasajero, idVuelo})
+           
         }
         
     }

@@ -13,14 +13,14 @@ function crearBoleteriaAvion({daoPasajero,daoReserva,daoVuelo,mailer,notificador
 
             const pasajero = await daoPasajero.getPasajeroById(idpasajero)
 
-            const vuelo = await dapVuelo.getVueloById(idVuelo)
+            const vuelo = await daoVuelo.getVueloById(idVuelo)
 
             const asiento = await daoVuelo.getAsientoDisponible(datosVenta.idVuelo)
-              // lo hace mongo
-            const boleto = crearReserva(pasajero, vuelo, asiento)
+          
+            const boleto = crearReserva({pasajero, vuelo, asiento})
 
             daoReserva.guardarReserva(boleto)
-                  //
+                
             const rutaArchivo = pdf.factura(pasajero.apellido, rutaArchivo, boleto)
 
             const sobre = mailer.construirSobre(boleto, rutaArchivo)

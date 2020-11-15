@@ -2,7 +2,7 @@ const { crearMailer } = require('../servicios/leo/mailer/mailer.js')
 //completar const pdfFactura = require(); 
 //completar const notificador = require()
 
-function factoryMailer() {
+function crearFactoryMailer() {
 
     const credencial = {}
     credencial.user = "exampletaller@outlook.com"
@@ -38,5 +38,5 @@ function factoryMailer() {
 
 }
 
-module.exports = { factoryMailer }
+module.exports = { crearFactoryMailer }
 
