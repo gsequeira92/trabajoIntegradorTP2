@@ -7,16 +7,16 @@
 //Ver si tienen superclase o interface que los usa juntos
 //Checkear Dao's para ver que tienen sus funciones
 
-function crearCUCancelacionReserva({ daoReservas, mailer, factoryFacturaCancelada, gestorNotificaciones }) {
+function crearCUCancelacionReserva({ ReservaDb, mailer, factoryFacturaCancelada, gestorNotificaciones }) {
 
     return {
-        execute: async (idCliente, idReserva) => {
+        execute: async (idReserva) => {
 
-            if (await daoReservas.getReservaById(idReserva)) {
+            if (await ReservaDb.getReservaById(idReserva)) {
                 const mailPasajero = await daoReservas.getEmailPasajero(idCliente)
 
                 //Dao borra reserva de DB
-                await daoReservas.deleteById(idReserva)
+                await ReservaDb.deleteById(idReserva)
 
                 //genera PDF con confirmacion de cancelacion
                 factoryFacturaCancelada(`${"cancelacion de reserva nro: " + idReserva}`, rutaArchivo)
@@ -32,7 +32,7 @@ function crearCUCancelacionReserva({ daoReservas, mailer, factoryFacturaCancelad
                 //mailer deberia incluir el sobre para configurarlos de alguna forma y solo usar sendMail()
                 mailer.sendMail(sobre)
                 //desuscribir
-                gestorNotificaciones.cancelarNotificacionVuelo(idReserva)
+                gestorNotificaciones.cancelarSuscripcionANotificacion(idReserva)
             }
 
         }
