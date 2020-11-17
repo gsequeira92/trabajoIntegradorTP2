@@ -4,15 +4,14 @@ const {crearGestorNotificaciones} = require('../servicios/gas/GestorNotificacion
 const {modificarComidaDeVuelo} = require('src/servicios/mati/historiaUsuario/historiaUsuario.js')
 const { factoryFacturaCancelada } = require('../factorys/factoryPdfs')
 const { factoryBilleteVuelo } = require('../factorys/factoryPdfs')
-
+const dbPasajero = require ('../Db/PasajeroDb.js')
+const dbReserva = require ('../Db/ReservaDb.js')
+const dbVuelo = require ('../Db/Vuelo.Db.js')
 
 const mailer = crearFactoryMailer()
 const notificador = crearGestorNotificaciones()
 
  //importar daos aca 
-const dbPasajero = daoPasajero
-const dbReserva = daoReserva
-const dbVuelo = daoVuelo
 
 function factoryCU(){
     
@@ -27,7 +26,7 @@ function factoryCU(){
         },
         getCU_ModificacionComida: () =>{
 
-            return modificarComidaDeVuelo({dbReserva, factoryBilleteVuelo, mailer})
+            return modificarComidaDeVuelo({dbReserva,dbPasajero, factoryBilleteVuelo, mailer})
         }
        
 

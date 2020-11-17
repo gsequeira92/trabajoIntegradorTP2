@@ -33,6 +33,7 @@ function crearMailer(credencial) {
            
 
             const options = {
+                
                 from: sobre.from,
                 to: sobre.mail,
                 subject: sobre.titulo,

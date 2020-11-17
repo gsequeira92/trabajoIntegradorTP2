@@ -7,9 +7,7 @@ function crearBoleteriaAvion({daoPasajero,daoReserva,daoVuelo,mailer,notificador
 
         venderBoleto: async ({idVuelo,idpasajero}) => {
            
-            /*if (await !pasajeroApi.existePasajero(datosVenta.pasajero)) {
-               // asumo que esto ya existe await pasajeroApi.agregarCliente(datosVenta.pasajero)
-            }*/
+        
 
             const pasajero = await daoPasajero.getPasajeroById(idpasajero)
 
@@ -38,3 +36,10 @@ function crearBoleteriaAvion({daoPasajero,daoReserva,daoVuelo,mailer,notificador
 module.exports = {
     crearBoleteriaAvion
 }
+
+
+
+
+    /*if (await !pasajeroApi.existePasajero(datosVenta.pasajero)) {
+               // asumo que esto ya existe await pasajeroApi.agregarCliente(datosVenta.pasajero)
+            }*/
