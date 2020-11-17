@@ -16,7 +16,7 @@ function aerolineasRouter({ aerolineaApi }) {
 
     router.put('/reservas/::id&true', async (req, res) => {
         try {
-            const modificacion = await apiAerolineas.modificarComida(req.params)
+             await apiAerolineas.modificarComida(req.params)
             res.status(204).json()
         } catch (e) {
             res.status(e.getMessage).json()
