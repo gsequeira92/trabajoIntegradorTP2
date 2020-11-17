@@ -8,9 +8,94 @@ function factoryBilleteVuelo({unNombreArchivo,unaRutaArchivo, objeto}) {
     
     nombreArchivo= unNombreArchivo;
     rutaArchivo = unaRutaArchivo;
+    contenido = objeto
     //nombreArchivo = `pdfTestFacturaCancelada`;
     //rutaArchivo = `src/servicios/mati/pdfs/`;
-    const objeto = {
+    
+    async function main() {
+        try {
+            generarPdfBillete(nombreArchivo, rutaArchivo, contenido) 
+        }
+        catch (err) {
+            console.log('Error ' + err)
+        }
+
+    }
+    main()
+}
+
+//FACTORY FACTURA
+function factoryFactura({unNombreArchivo,unaRutaArchivo, objeto}) {
+    
+    nombreArchivo= unNombreArchivo;
+    rutaArchivo = unaRutaArchivo;
+    contenido = objeto
+    //nombreArchivo = `pdfTestFacturaCancelada`;
+    //rutaArchivo = `src/servicios/mati/pdfs/`;
+    
+    async function main() {
+        try {
+            generarFactura(nombreArchivo, rutaArchivo, contenido) 
+        }
+        catch (err) {
+            console.log('Error ' + err)
+        }
+
+    }
+    main()
+}
+
+
+//FACTORY FACTURA CANCELADA
+function factoryFacturaCancelada({unNombreArchivo,unaRutaArchivo, objeto}) {
+
+    nombreArchivo= unNombreArchivo;
+    rutaArchivo = unaRutaArchivo;
+    contenido = objeto
+    //nombreArchivo = `pdfTestFacturaCancelada`;
+    //rutaArchivo = `src/servicios/mati/pdfs/`;
+    
+    async function main() {
+        try {
+            generarFacturaCancelada(nombreArchivo, rutaArchivo, contenido) 
+        }
+        catch (err) {
+            console.log('Error ' + err)
+        }
+
+    }
+    main()
+}
+
+
+module.exports = { factoryBilleteVuelo }
+module.exports = { factoryFactura }
+module.exports = { factoryFacturaCancelada }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+const objeto = {
         avion: {
             "modeloAvion": "BOEING 737 JET",//
         },
@@ -44,26 +129,8 @@ function factoryBilleteVuelo({unNombreArchivo,unaRutaArchivo, objeto}) {
             "terminal": "C"//
         }
     }
-    async function main() {
-        try {
-            generarPdfBillete(nombreArchivo, rutaArchivo, objeto) 
-        }
-        catch (err) {
-            console.log('Error ' + err)
-        }
 
-    }
-    main()
-}
-
-//FACTORY FACTURA
-function factoryFactura({unNombreArchivo,unaRutaArchivo}) {
-    
-    nombreArchivo= unNombreArchivo;
-    rutaArchivo = unaRutaArchivo;
-    //nombreArchivo = `pdfTestFacturaCancelada`;
-    //rutaArchivo = `src/servicios/mati/pdfs/`;
-    const objeto = {
+const objeto = {
         avion:{ "modeloAvion": "BOEING 737 JET",//
                 "numeroAvion": "5312563643",   //
         },
@@ -89,27 +156,8 @@ function factoryFactura({unNombreArchivo,unaRutaArchivo}) {
                 "codigo": "EZE",//
     }
     }
-    async function main() {
-        try {
-            generarFactura(nombreArchivo, rutaArchivo, objeto) 
-        }
-        catch (err) {
-            console.log('Error ' + err)
-        }
 
-    }
-    main()
-}
-
-
-//FACTORY FACTURA CANCELADA
-function factoryFacturaCancelada({unNombreArchivo,unaRutaArchivo}) {
-
-    nombreArchivo= unNombreArchivo;
-    rutaArchivo = unaRutaArchivo;
-    //nombreArchivo = `pdfTestFacturaCancelada`;
-    //rutaArchivo = `src/servicios/mati/pdfs/`;
-    const objeto = {
+const objeto = {
         avion:{ "modeloAvion": "BOEING 737 JET",//
                 "numeroAvion": "5312563643",   //
         },
@@ -135,20 +183,4 @@ function factoryFacturaCancelada({unNombreArchivo,unaRutaArchivo}) {
                 "codigo": "EZE",//
     }
     }
-    async function main() {
-        try {
-            generarFacturaCancelada(nombreArchivo, rutaArchivo, objeto) 
-        }
-        catch (err) {
-            console.log('Error ' + err)
-        }
-
-    }
-    main()
-}
-
-
-module.exports = { factoryBilleteVuelo }
-module.exports = { factoryFactura }
-module.exports = { factoryFacturaCancelada }
-
+    */

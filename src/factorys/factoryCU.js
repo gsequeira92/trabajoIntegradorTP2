@@ -1,7 +1,7 @@
 const {crearFactoryMailer} = require ('./factoryMailer.js')
 const {crearBoleteriaAvion} = require ('../servicios/leo/moduloVenta/CU_ventaBoleto.js')
 const {crearGestorNotificaciones} = require('../servicios/gas/GestorNotificaciones.js')
-const {modificarComida} = require('src/servicios/mati/historiaUsuario/historiaUsuario.js')
+const {modificarComidaDeVuelo} = require('src/servicios/mati/historiaUsuario/historiaUsuario.js')
 const { factoryFacturaCancelada } = require('../factorys/factoryPdfs')
 const { factoryBilleteVuelo } = require('../factorys/factoryPdfs')
 
@@ -27,7 +27,7 @@ function factoryCU(){
         },
         getCU_ModificacionComida: () =>{
 
-            return modificarComida({dbReserva, factoryBilleteVuelo, mailer})
+            return modificarComidaDeVuelo({dbReserva, factoryBilleteVuelo, mailer})
         }
        
 
