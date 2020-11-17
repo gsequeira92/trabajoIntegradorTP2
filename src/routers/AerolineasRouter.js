@@ -25,6 +25,7 @@ function aerolineasRouter({ aerolineaApi }) {
 
     router.delete('/reservas/:id', async (req, res) => {
 
+        //El try catch va aca o es parte del cliente? 
         try {
             await apiAerolineas.cancelarReserva(req.params.id)
             res.status(204).json()
