@@ -12,7 +12,7 @@ const CuAlertas = crearCUProgramarNotificaciones(gestor, tempo)
 
 const cuAlertasFactory = {
 
-    return {
+    return :{
 
         getCuProgramarAlertas: () => {
             return CuAlertas

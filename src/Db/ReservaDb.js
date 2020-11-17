@@ -73,6 +73,11 @@ async function crearReservasDaoDb(cnxString, dbName, collectionName) {
             await client.close()
             log('conexion cerrada')
         },
+        //buscar el dni para el pasajero
+        getDniPasajero: async (unId) => {
+            const reservas = await getById(unId)
+            return reservas.dniPasajero
+        }
 
     }
 

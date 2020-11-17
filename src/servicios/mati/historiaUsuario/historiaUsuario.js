@@ -6,16 +6,17 @@ LA MODIFICACION SERA PARA CAMBIAR LA COMIDA A SIN TACC
 -Enviar por mail
 */
 
-function modificarComidaDeVuelo({dbReserva, factoryBilleteVuelo, mailer}) {//generarPdfBillete,mandarBoletoXMail
+function modificarComidaDeVuelo({dbReserva, dbPasajero, factoryBilleteVuelo, mailer}) {//generarPdfBillete,mandarBoletoXMail
 
     return {
         //Recibo el id para identificar de manera unica la reserva, y el boolean para ver si la comida es Sin Tacc
         cambioDeComida: async (idReserva, boolean) => {
             //verdadero es SIN TACC, falso es CON TACC
             await dbReserva.updateValorComida(idReserva, boolean) 
-            //pedir reserva para mandarla como objeto al generador de pdf?
+            const objeto = await dbReserva.getById(idReserva)
+            const pasajero = await dbPasajero.getById(dbReserva.getDniPasajero(idReserva))
             factoryBilleteVuelo(pasajero.apellido, rutaArchivo, objeto)
-            const sobre = mailer.getSobre(boleto)//como mando el pdf? tengo que retornarlo en la linea de arriba?
+            const sobre = mailer.getSobre(`${rutaArchivo}`/`${pasajero.apellido}`)
             mailer.sendMail(sobre)
         }
     }
