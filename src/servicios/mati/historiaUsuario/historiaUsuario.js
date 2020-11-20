@@ -13,9 +13,9 @@ function modificarComidaDeVuelo({dbReserva, dbPasajero, factoryBilleteVuelo, mai
         cambioDeComida: async (idReserva, boolean) => {
             //verdadero es SIN TACC, falso es CON TACC
             await dbReserva.updateValorComida(idReserva, boolean) 
-            const objeto = await dbReserva.getById(idReserva)
+            const reserva = await dbReserva.getById(idReserva)
             const pasajero = await dbPasajero.getById(dbReserva.getDniPasajero(idReserva))
-            factoryBilleteVuelo(pasajero.apellido, rutaArchivo, objeto)
+            factoryBilleteVuelo(pasajero.apellido, rutaArchivo, reserva)
             const sobre = mailer.getSobre(`${rutaArchivo}`/`${pasajero.apellido}`)
             mailer.sendMail(sobre)
         }
