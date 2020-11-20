@@ -30,9 +30,9 @@ function aerolineasRouter({ aerolineaApi }) {
             await apiAerolineas.cancelarReserva(req.params.id)
             res.status(204).json()
         } catch (error) {
-            const mensajeError = res.statusMessage()
             console.log(mensajeError, error.getMessage())
-            res.status(res.statusCode).json()
+            res.status(calcular).json({descripcion: error.getMessage()})
+            
         }
 
     })
