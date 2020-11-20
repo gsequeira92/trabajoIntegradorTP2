@@ -1,9 +1,11 @@
 const express = require('express')
+const { manejadorDeErrores} = require('../routers/manejadorErrores')
 
 //tiene que recibir la api por parametro y asignarla despues a una constante para usar
 function aerolineasRouter({ aerolineaApi }) {
 
     const router = express.Router()
+  
     //esta api se va a encargar de borrar la reserva del DAO (apiAerolineas.deleteById(id))
     const apiAerolineas = aerolineaApi
 
@@ -25,14 +27,11 @@ function aerolineasRouter({ aerolineaApi }) {
 
     router.delete('/reservas/:id', async (req, res) => {
 
-        //El try catch va aca o es parte del cliente? 
         try {
             await apiAerolineas.cancelarReserva(req.params.id)
             res.status(204).json()
         } catch (error) {
-            console.log(mensajeError, error.getMessage())
-            res.status(calcular).json({descripcion: error.getMessage()})
-            
+            manejadorDeErrores(error,req,res,next)
         }
 
     })
