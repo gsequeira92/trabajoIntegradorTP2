@@ -1,4 +1,4 @@
-function manejadorDeErrores(error, req, res, next) {
+function manejadorDeErrores(error, req, res) {
     if (error.type === 'INVALID_ARGS') {
         res.status(400)
     } else if (error.type === 'NOT_FOUND') {

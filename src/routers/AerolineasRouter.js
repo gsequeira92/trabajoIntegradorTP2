@@ -5,8 +5,6 @@ const { manejadorDeErrores} = require('../routers/manejadorErrores')
 function aerolineasRouter({ aerolineaApi }) {
 
     const router = express.Router()
-  
-    //esta api se va a encargar de borrar la reserva del DAO (apiAerolineas.deleteById(id))
     const apiAerolineas = aerolineaApi
 
     router.post('/ventas', async (req, res) => {
@@ -14,14 +12,25 @@ function aerolineasRouter({ aerolineaApi }) {
         const reserva = await apiAerolineas.venderPasaje(req.body)
         res.status(201).json(reserva)
 
+        //leo, si quisieras usar el manejador de errores te dejo un snippet aca comentado: 
+        // try {
+        //     const reserva = await apiAerolineas.venderPasaje(req.body)
+        //      res.status(201).json(reserva)
+        // } catch (error) {
+        //     manejadorDeErrores(error,req,res)
+            
+        // }
+
     })
 
     router.put('/reservas/::id&true', async (req, res) => {
         try {
              await apiAerolineas.modificarComida(req.params)
             res.status(204).json()
-        } catch (e) {
-            res.status(e.getMessage).json()
+        } catch (error) {
+            //Te agrego el manejador de errores mati, solo si lo queres usar
+            manejadorDeErrores(error,req,res)
+            
         }
     })
 
@@ -31,7 +40,7 @@ function aerolineasRouter({ aerolineaApi }) {
             await apiAerolineas.cancelarReserva(req.params.id)
             res.status(204).json()
         } catch (error) {
-            manejadorDeErrores(error,req,res,next)
+            manejadorDeErrores(error,req,res)
         }
 
     })

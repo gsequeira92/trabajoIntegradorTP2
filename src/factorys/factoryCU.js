@@ -11,8 +11,6 @@ const dbVuelo = require ('../Db/Vuelo.Db.js')
 const mailer = crearFactoryMailer()
 const notificador = crearGestorNotificaciones()
 
- //importar daos aca 
-
 function factoryCU(){
     
     return{
@@ -20,10 +18,10 @@ function factoryCU(){
             const boleteria = crearBoleteriaAvion({dbPasajero,dbReserva,dbVuelo,mailer,notificador})
             return boleteria
         },
-        getCU_Cancelacion: () =>{
+        // getCU_Cancelacion: () =>{
 
-            return crearCUCancelacionReserva({mailer, dbReserva, factoryFacturaCancelada, gestorDeNotificaciones})
-        },
+        //     return crearCUCancelacionReserva({mailer, dbReserva, factoryFacturaCancelada, gestorDeNotificaciones})
+        // },
         getCU_ModificacionComida: () =>{
 
             return modificarComidaDeVuelo({dbReserva,dbPasajero, factoryBilleteVuelo, mailer})

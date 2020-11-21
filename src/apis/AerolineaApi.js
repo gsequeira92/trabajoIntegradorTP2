@@ -1,13 +1,20 @@
-//import : preguntar marian
 const  factoryCU  = require ('../../../factorys/factoryCU.js')
+const cuAlertasFactory = require('../factorys/CuProgramarAlertasFactory')
+const CuFactoryCancelacion = require('../factorys/CuCancelacionFactory')
 
 function crearAerolineaApi(){
 
     const CU_Venta = factoryCU.getCU_Venta() 
 
-    const CU_Cancelacion = factoryCU.getCU_Cancelacion()
+    //Importado por fuera del factoryCU
+    const CU_Cancelacion = CuFactoryCancelacion.getCU_Cancelacion()
+
 
     const CU_ModificacionComida = factoryCU.getCU_ModificacionComida()
+
+
+    //Importado por fuera del factoryCU
+    const CU_ActivarAlertasProgramadas = cuAlertasFactory.getCuProgramarAlertas()
 
     return{
         venderPasaje: ({idPasajero, idVuelo}) =>{
@@ -20,6 +27,9 @@ function crearAerolineaApi(){
         modificarComida: (idReserva, comidaSinTacc) =>{
             return CU_ModificacionComida.cambioDeComida(idReserva, comidaSinTacc)
         },
+        notificarSuscriptosAlertas: () =>{
+            return CU_ActivarAlertasProgramadas.execute(nombreEventoTemporizado, intervalo)
+        }
         
     }
 
