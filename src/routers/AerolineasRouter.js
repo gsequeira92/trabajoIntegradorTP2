@@ -28,7 +28,7 @@ function aerolineasRouter({ aerolineaApi }) {
              await apiAerolineas.modificarComida(req.params)
             res.status(204).json()
         } catch (error) {
-            //Te agrego el manejador de errores mati, solo si lo queres usar
+            //Te agrego el manejador de errores mati, solo si lo queres usar bien ahiii
             manejadorDeErrores(error,req,res)
             
         }

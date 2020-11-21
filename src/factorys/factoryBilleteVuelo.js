@@ -1,76 +1,24 @@
 const { generarPdfBillete } = require("./appBilleteVuelo");
-const { generarFactura } = require("./appFacturaVuelo");
-const { generarFacturaCancelada } = require("./appFacturaCancelacionVuelo");
+
 
 //FACTORY BILLETE VUELO
 
-function factoryBilleteVuelo({unNombreArchivo,unaRutaArchivo, objeto}) {
+function crearBilleteVuelo({unNombreArchivo, unaRutaArchivo, objeto}) {
     
     nombreArchivo= unNombreArchivo;
     rutaArchivo = unaRutaArchivo;
     contenido = objeto
     //nombreArchivo = `pdfTestFacturaCancelada`;
     //rutaArchivo = `src/servicios/mati/pdfs/`;
-    
-    async function main() {
-        try {
-            generarPdfBillete(nombreArchivo, rutaArchivo, contenido) 
-        }
-        catch (err) {
-            console.log('Error ' + err)
-        }
-
-    }
-    main()
-}
-
-//FACTORY FACTURA
-function factoryFactura({unNombreArchivo,unaRutaArchivo, objeto}) {
-    
-    nombreArchivo= unNombreArchivo;
-    rutaArchivo = unaRutaArchivo;
-    contenido = objeto
-    //nombreArchivo = `pdfTestFacturaCancelada`;
-    //rutaArchivo = `src/servicios/mati/pdfs/`;
-    
-    async function main() {
-        try {
-            generarFactura(nombreArchivo, rutaArchivo, contenido) 
-        }
-        catch (err) {
-            console.log('Error ' + err)
-        }
-
-    }
-    main()
+    generarPdfBillete(nombreArchivo, rutaArchivo, contenido)
+       
+     
+        
 }
 
 
-//FACTORY FACTURA CANCELADA
-function factoryFacturaCancelada({unNombreArchivo,unaRutaArchivo, objeto}) {
+module.exports = { crearBilleteVuelo }
 
-    nombreArchivo= unNombreArchivo;
-    rutaArchivo = unaRutaArchivo;
-    contenido = objeto
-    //nombreArchivo = `pdfTestFacturaCancelada`;
-    //rutaArchivo = `src/servicios/mati/pdfs/`;
-    
-    async function main() {
-        try {
-            generarFacturaCancelada(nombreArchivo, rutaArchivo, contenido) 
-        }
-        catch (err) {
-            console.log('Error ' + err)
-        }
-
-    }
-    main()
-}
-
-
-module.exports = { factoryBilleteVuelo }
-module.exports = { factoryFactura }
-module.exports = { factoryFacturaCancelada }
 
 
 
