@@ -1,6 +1,5 @@
 const { crearMailer } = require('../servicios/leo/mailer/mailer.js')
-//completar const pdfFactura = require(); 
-//completar const notificador = require()
+
 
 function crearFactoryMailer() {
 
