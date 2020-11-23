@@ -22,10 +22,10 @@ function factoryCU(){
 
         //     return crearCUCancelacionReserva({mailer, dbReserva, factoryFacturaCancelada, gestorDeNotificaciones})
         // },
-        getCU_ModificacionComida: () =>{
+        //getCU_ModificacionComida: () =>{
 
-            return modificarComidaDeVuelo({dbReserva,dbPasajero, factoryBilleteVuelo, mailer})
-        }
+          //  return modificarComidaDeVuelo({dbReserva,dbPasajero, factoryBilleteVuelo, mailer})
+        //}
        
 
     }

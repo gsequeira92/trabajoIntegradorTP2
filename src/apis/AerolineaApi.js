@@ -1,6 +1,7 @@
-const  factoryCU  = require ('../../../factorys/factoryCU.js')
+const factoryCU  = require ('../../../factorys/factoryCU.js')
 const cuAlertasFactory = require('../factorys/CuProgramarAlertasFactory')
 const CuFactoryCancelacion = require('../factorys/CuCancelacionFactory')
+const CuModificacionComida = require('../factorys/CuModificacionComida')
 
 function crearAerolineaApi(){
 
@@ -9,8 +10,8 @@ function crearAerolineaApi(){
     //Importado por fuera del factoryCU
     const CU_Cancelacion = CuFactoryCancelacion.getCU_Cancelacion()
 
-
-    const CU_ModificacionComida = factoryCU.getCU_ModificacionComida()
+    //Importado por fuera del factoryCU
+    const CU_ModificacionComida = CuModificacionComida.getCU_ModificacionComida()
 
 
     //Importado por fuera del factoryCU

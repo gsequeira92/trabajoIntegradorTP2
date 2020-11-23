@@ -18,6 +18,9 @@ function generarFacturaCancelada(nombreArchivo, rutaArchivo, datosFactura) {
     pdfDoc.pipe(guardarArchivo(rutaArchivo, nombreArchivo));
     pdfDoc.end();
 
+    const pdfRutaArchivo = `${rutaArchivo}/${nombreArchivo}`
+    return pdfRutaArchivo
+
 }
 
 module.exports = {

@@ -17,6 +17,8 @@ function generarPdfBillete(nombreArchivo, rutaArchivo, datosDelBillete) { //"gen
     let pdfDoc = printer.createPdfKitDocument(docDefinition);
     pdfDoc.pipe(guardarArchivo(rutaArchivo, nombreArchivo));
     pdfDoc.end();
+    const pdfRutaArchivo = `${rutaArchivo}/${nombreArchivo}`
+    return pdfRutaArchivo
 
 }
 

@@ -9,7 +9,8 @@ function crearFactura({unNombreArchivo,unaRutaArchivo, objeto}) {
     //nombreArchivo = `pdfTestFacturaCancelada`;
     //rutaArchivo = `src/servicios/mati/pdfs/`;
     
-    generarFactura(nombreArchivo, rutaArchivo, contenido) 
+    const rutaPdf = generarFactura(nombreArchivo, rutaArchivo, contenido)
+    return rutaPdf
        
 }
 
