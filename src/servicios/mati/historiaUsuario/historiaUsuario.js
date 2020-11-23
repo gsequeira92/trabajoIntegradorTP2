@@ -18,9 +18,9 @@ function modificarComidaDeVuelo({dbReserva, dbPasajero, factoryBilleteVuelo, mai
             const reserva = await dbReserva.getById(idReserva)
             const pasajero = await dbPasajero.getById(dbReserva.getDniPasajero(idReserva))
             //el nombre del archivo sera el apellido del pasajero
-            factoryBilleteVuelo(pasajero.apellido, rutaArchivo, reserva)
+            const pdfRutaArchivo = factoryBilleteVuelo(pasajero.apellido, rutaArchivo, reserva)
             //envio mail con los datos nuevos
-            const sobre = mailer.getSobre(`${rutaArchivo}`/`${pasajero.apellido}`)
+            const sobre = mailer.getSobre(pdfRutaArchivo)
             mailer.sendMail(sobre)
         }
     }
