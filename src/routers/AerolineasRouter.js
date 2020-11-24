@@ -15,16 +15,7 @@ function aerolineasRouter({ aerolineaApi }) {
         } catch (error) {
             manejadorDeErrores(error, req, res)
 
-        
-        try {
-            const reserva = await apiAerolineas.venderPasaje(req.body)
-             res.status(201).json(reserva)
-         } catch (error) {
-         manejadorDeErrores(error,req,res)
-            
-         }
-
-    })
+    }
 
     router.put('/reservas/::id&true', async (req, res) => {
         try {
