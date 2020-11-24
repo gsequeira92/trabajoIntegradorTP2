@@ -5,12 +5,13 @@ const { generarPdfBillete } = require("./appBilleteVuelo");
 
 function crearBilleteVuelo({unNombreArchivo, unaRutaArchivo, objeto}) {
     
-    nombreArchivo= unNombreArchivo;
-    rutaArchivo = unaRutaArchivo;
-    contenido = objeto
+    const nombreArchivo= unNombreArchivo;
+    const rutaArchivo = unaRutaArchivo;
+    const contenido = objeto;
     //nombreArchivo = `pdfTestFacturaCancelada`;
     //rutaArchivo = `src/servicios/mati/pdfs/`;
-    generarPdfBillete(nombreArchivo, rutaArchivo, contenido)
+    const rutaPdf = generarPdfBillete(nombreArchivo, rutaArchivo, contenido)
+    return rutaPdf
        
      
         

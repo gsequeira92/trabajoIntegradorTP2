@@ -3,14 +3,14 @@ const { generarFacturaCancelada } = require("./appFacturaCancelacionVuelo");
 //FACTORY FACTURA CANCELADA
 function crearFacturaCancelada({unNombreArchivo,unaRutaArchivo, objeto}) {
 
-    nombreArchivo= unNombreArchivo;
-    rutaArchivo = unaRutaArchivo;
-    contenido = objeto
+    const nombreArchivo= unNombreArchivo;
+    const rutaArchivo = unaRutaArchivo;
+    const contenido = objeto;
     //nombreArchivo = `pdfTestFacturaCancelada`;
     //rutaArchivo = `src/servicios/mati/pdfs/`;
     
-    
-    generarFacturaCancelada(nombreArchivo, rutaArchivo, contenido) 
+    const rutaPdf = generarFacturaCancelada(nombreArchivo, rutaArchivo, contenido)
+    return rutaPdf 
         
 }
 

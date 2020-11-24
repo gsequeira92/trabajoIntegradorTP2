@@ -1,6 +1,7 @@
-const  factoryCU  = require ('../../../factorys/factoryCU.js')
+const factoryCU  = require ('../../../factorys/factoryCU.js')
 const cuAlertasFactory = require('../factorys/CuProgramarAlertasFactory')
 const CuFactoryCancelacion = require('../factorys/CuCancelacionFactory')
+const CuModificacionComida = require('../factorys/CuModificacionComida')
 
 function crearAerolineaApi(){
 
@@ -20,6 +21,8 @@ function crearAerolineaApi(){
             return CU_ModificacionComida.cambioDeComida(idReserva, comidaSinTacc)
         },
         notificarSuscriptosAlertas: () =>{
+            //aca ya le puedo dar valor a los parametros? 
+            //va en la api? 
             return CU_ActivarAlertasProgramadas.execute(nombreEventoTemporizado, intervalo)
         }
         

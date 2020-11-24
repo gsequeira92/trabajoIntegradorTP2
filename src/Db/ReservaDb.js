@@ -1,6 +1,6 @@
 const { MongoClient } = require('mongodb')
 const { crearReserva } = require('/src/estudiantes/modelos/Reserva.js')
-const { crearErrorRecursoNoEncontrado, crearErrorArgumentosInvalidos, crearErrorDeBaseDeDatos
+const { crearErrorRecursoNoEncontrado, crearErrorDeBaseDeDatos
 } = require('../../compartido/errores/ApiError.js')
 const config = require('../../config/config.js.')
 
@@ -8,7 +8,6 @@ function log(line) {
     if (config.isLogEnabled()) console.log(line)
 }
 //Primero abrir mongod.exe
-
 //conexion en compass es:
 //hostname: localhost
 //port: 27017

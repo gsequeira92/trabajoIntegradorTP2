@@ -3,13 +3,14 @@ const { generarFactura } = require("./appFacturaVuelo");
 //FACTORY FACTURA
 function crearFactura({unNombreArchivo,unaRutaArchivo, objeto}) {
     
-    nombreArchivo= unNombreArchivo;
-    rutaArchivo = unaRutaArchivo;
-    contenido = objeto
+    const nombreArchivo= unNombreArchivo;
+    const rutaArchivo = unaRutaArchivo;
+    const contenido = objeto;
     //nombreArchivo = `pdfTestFacturaCancelada`;
     //rutaArchivo = `src/servicios/mati/pdfs/`;
     
-    generarFactura(nombreArchivo, rutaArchivo, contenido) 
+    const rutaPdf = generarFactura(nombreArchivo, rutaArchivo, contenido)
+    return rutaPdf
        
 }
 
