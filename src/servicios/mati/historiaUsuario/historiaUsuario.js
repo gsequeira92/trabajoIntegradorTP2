@@ -27,3 +27,26 @@ function modificarComidaDeVuelo({dbReserva, dbPasajero, factoryBilleteVuelo, mai
 }
 
 module.exports = { modificarComidaDeVuelo }
+
+
+
+/*
+function modificarComidaDeVuelo({dbReserva, dbPasajero, factoryBilleteVuelo, mailer}) {//generarPdfBillete,mandarBoletoXMail
+
+    return {
+        //Recibo el id para identificar de manera unica la reserva, y el boolean para ver si la comida es Sin Tacc
+        cambioDeComida: async (idReserva, boolean) => {
+            //verdadero es SIN TACC, falso es CON TACC
+            const reserva = await dbReserva.getById(idReserva)
+
+            reserva.updateValorComida(boolean) 
+            
+            const pasajero = await dbPasajero.getById(dbReserva.getDniPasajero(idReserva))
+
+            const pdfRutaArchivo = factoryBilleteVuelo(pasajero.apellido, rutaArchivo, reserva)
+            
+            const sobre = mailer.getSobre(pdfRutaArchivo)
+            mailer.sendMail(sobre)
+        }
+    }
+}*/

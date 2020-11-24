@@ -56,4 +56,10 @@ function crearReserva(objeto) {
     return reserv
 }
 
-module.exports = { crearReserva }
+/*function updateValorComida (bool) {
+    
+    this.comidaSinTacc = bool
+    
+} */
+
+module.exports = { crearReserva } //updateValorComida
