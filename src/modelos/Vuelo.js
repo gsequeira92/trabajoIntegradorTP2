@@ -90,7 +90,17 @@ function crearVuelo(objeto) {
         vuelo.id = objeto.id
     }
 
-    return vuelo
-}
+    vuelo.asientosDisponibles = ['H1','H3','H5']
+    vuelo.asientosOcupados = []
+
+    return {
+        vuelo,
+        getAsientoDisponible : ()=>{
+            const asiento = this.asientosDisponibles.pop()
+            this.asientosOcupados.push(asiento)
+            return asiento
+
+        }
+    }
 
 module.exports = { crearVuelo }

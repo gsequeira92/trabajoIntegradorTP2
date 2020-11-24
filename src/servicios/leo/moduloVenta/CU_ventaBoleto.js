@@ -2,7 +2,7 @@ const {crearReserva} = require ('../../../estudiantes/modelos/Reserva.js')
 
 
 
-function crearBoleteriaAvion({daoPasajero,daoReserva,daoVuelo,mailer,notificador}) {
+function crearBoleteriaAvion({daoPasajero,daoReserva,daoVuelo,mailer,notificador,generadorPDF}) {
     
     return  {
 
@@ -18,14 +18,14 @@ function crearBoleteriaAvion({daoPasajero,daoReserva,daoVuelo,mailer,notificador
             const boleto = crearReserva({pasajero, vuelo, asiento})
 
             await daoReserva.guardarReserva(boleto)
-                // factura : mejorar nombre
-            const rutaArchivo = pdf.factura(pasajero.apellido, rutaArchivo, boleto)
+                
+            const rutaArchivo = generadorPDF.getBoletoPDF({pasajero, rutaArchivo, boleto})
 
-            const sobre = mailer.construirSobre(boleto,pasajero, rutaArchivo)
+            const sobre = mailer.getSobreVenta({pasajero, rutaArchivo})
 
-            mailer.sendMail(sobre)
+            await mailer.sendMail(sobre)
 
-            notificador.crearNotificacionVuelo(boleto)
+            await notificador.crearNotificacionVuelo(boleto)
 
             return boleto
         }

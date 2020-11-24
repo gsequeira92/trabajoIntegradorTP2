@@ -1,5 +1,5 @@
 const nodemailer = require("nodemailer");
-function crearMailer(credencial) {
+  function crearMailer(credencial) {
 
 
 
@@ -17,7 +17,7 @@ function crearMailer(credencial) {
 
     return {
      
-        sendMail(sobre) {
+          sendMail : async (sobre) => {
             if (!esCorreoElectronico(sobre.mail)) {
                 throw new Error("El email de destino es incorrecto")
             }
@@ -45,13 +45,7 @@ function crearMailer(credencial) {
 
             }
 
-            transporter.sendMail(options, (err, info) => {
-                if (err) {
-                    throw err
-                } else {
-                    console.log("Correo enviado con exito " + info.envelope.to)
-                }
-            })
+           await transporter.sendMail(options)
 
         }
     }
@@ -68,4 +62,12 @@ function validarString(msg){
     }
     return stringValido
 }
+/*
+(err, info) => {
+    if (err) {
+        throw err
+    } else {
+        console.log("Correo enviado con exito " + info.envelope.to)
+    }
+*/
 module.exports = { crearMailer }

@@ -12,32 +12,34 @@ function crearCUCancelacionReserva({ ReservaDb, mailer, factoryFacturaCancelada,
     return {
         execute: async (idReserva) => {
 
-            if (await ReservaDb.getReservaById(idReserva)) {
-                const mailPasajero = await daoReservas.getEmailPasajero(idCliente)
 
-                //Dao borra reserva de DB
-                await ReservaDb.deleteById(idReserva)
+            const reserva = await ReservaDb.getReservaById(idReserva)
 
-                //genera PDF con confirmacion de cancelacion
-                factoryFacturaCancelada(`${"cancelacion de reserva nro: " + idReserva}`, rutaArchivo)
-               
-                //agregar el pdfAdjunto al sobre e ir construyendolo
-                const sobre = mailer.getSobre()
-                sobre.from(mailer.from)
-                sobre.to(mailPasajero)
-                sobre.title("cancelacion de reserva")
-                sobre.text("Le informamos respecto de su cancelacion")
-                sobre.addAttachments(rutaArchivo)
+            const mailPasajero = reserva.mailPasajero
 
-                //mailer deberia incluir el sobre para configurarlos de alguna forma y solo usar sendMail()
-                mailer.sendMail(sobre)
-                //desuscribir
-                gestorNotificaciones.cancelarSuscripcionANotificacion(idReserva)
-            }
+            //Dao borra reserva de DB
+            await ReservaDb.deleteById(idReserva)
+
+            //genera PDF con confirmacion de cancelacion
+            factoryFacturaCancelada(`${"cancelacion de reserva nro: " + idReserva}`, rutaArchivo)
+
+            //agregar el pdfAdjunto al sobre e ir construyendolo
+            const sobre = mailer.getSobre()
+            sobre.from(mailer.from)
+            sobre.to(mailPasajero)
+            sobre.title("cancelacion de reserva")
+            sobre.text("Le informamos respecto de su cancelacion")
+            sobre.addAttachments(rutaArchivo)
+
+            //mailer deberia incluir el sobre para configurarlos de alguna forma y solo usar sendMail()
+            mailer.sendMail(sobre)
+            //desuscribir
+            gestorNotificaciones.cancelarSuscripcionANotificacion(idReserva)
+
 
         }
     }
 
 }
- //let pdfAdjunto = new Blob(fs.readFile(rutaArchivo, 'uft8'), { type: 'application/pdf' })
+//let pdfAdjunto = new Blob(fs.readFile(rutaArchivo, 'uft8'), { type: 'application/pdf' })
 module.exports = { crearCUCancelacionReserva }

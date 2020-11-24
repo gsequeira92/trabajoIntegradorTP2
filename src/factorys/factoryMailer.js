@@ -16,21 +16,32 @@ function crearFactoryMailer() {
             return obj
         },
 
-        // usar DTO, siento que esto se repite mucho en el servicio/mailer
-        getSobre: ({mail,asunto, texto, pdf}) => {
+        getSobreVenta: ({pasajero,pdf}) => {
             const sobre = {
                 from: credencial.user,
-                to: mail,
-                subject: asunto,
-                text: texto,
+                to: pasajero.mail,
+                subject:"Su compra fue exitosa",
+                text: "Gracias por volar en nuestra aerolinea, adjuntamos su boleto",
                 attachments: [
                     {
                         path: pdf
                     }]
             }
             return sobre 
-
-            }
+            },
+            getSobreCancelacion: ({pasajero,pdf}) => {
+                const sobre = {
+                    from: credencial.user,
+                    to: pasajero.mail,
+                    subject:"Cancelacion exitosa",
+                    text: " Lamentamos su cancelación, esperamos volar con usted proximamente",
+                    attachments: [
+                        {
+                            path: pdf
+                        }]
+                }
+                return sobre 
+                }
     }
     
 
