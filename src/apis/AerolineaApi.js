@@ -29,6 +29,8 @@ function crearAerolineaApi(){
             return CU_ModificacionComida.cambioDeComida(idReserva, comidaSinTacc)
         },
         notificarSuscriptosAlertas: () =>{
+            //aca ya le puedo dar valor a los parametros? 
+            //va en la api? 
             return CU_ActivarAlertasProgramadas.execute(nombreEventoTemporizado, intervalo)
         }
         
