@@ -1,5 +1,5 @@
 const express = require('express')
-const { crearEstudiantesRouter } = require('../../estudiantes/routers/EstudiantesRouterExpress.js')
+const { aerolineasRouter } = require('../../../routers/AerolineasRouter')
 
 function createServer({ port = 0, aplicacion }) {
 
@@ -7,7 +7,7 @@ function createServer({ port = 0, aplicacion }) {
 
     app.use(express.json())
 
-    app.use('/api/estudiantes', crearEstudiantesRouter({ aplicacion }))
+    app.use('/api/aerolineas', aerolineasRouter({ aplicacion }))
 
     app.use(manejadorDeErrores)
 

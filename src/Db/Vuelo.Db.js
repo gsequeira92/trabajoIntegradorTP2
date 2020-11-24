@@ -67,16 +67,6 @@ async function crearVueloDaoDb(cnxString, dbName, collectionName) {
 
     }
 
-
-
-
-
-
-
-
-
-
-
 }
 
-module.exports = { crearReservasDaoDb }
+module.exports = { crearVueloDaoDb }

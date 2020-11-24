@@ -17,11 +17,11 @@ function crearCUCancelacionReserva({ ReservaDb, mailer, factoryFacturaCancelada,
 
             const mailPasajero = reserva.mailPasajero
 
+            //genera PDF con confirmacion de cancelacion
+            const rutaArchivo =  factoryFacturaCancelada(`${"cancelacion de reserva nro: " + idReserva}`, rutaArchivo, reserva)
+
             //Dao borra reserva de DB
             await ReservaDb.deleteById(idReserva)
-
-            //genera PDF con confirmacion de cancelacion
-            factoryFacturaCancelada(`${"cancelacion de reserva nro: " + idReserva}`, rutaArchivo)
 
             //agregar el pdfAdjunto al sobre e ir construyendolo
             const sobre = mailer.getSobre()
@@ -31,7 +31,6 @@ function crearCUCancelacionReserva({ ReservaDb, mailer, factoryFacturaCancelada,
             sobre.text("Le informamos respecto de su cancelacion")
             sobre.addAttachments(rutaArchivo)
 
-            //mailer deberia incluir el sobre para configurarlos de alguna forma y solo usar sendMail()
             mailer.sendMail(sobre)
             //desuscribir
             gestorNotificaciones.cancelarSuscripcionANotificacion(idReserva)

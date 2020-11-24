@@ -8,7 +8,7 @@ function crearAerolineaApi(){
     const CU_Venta = factoryCU.getCU_Venta() 
 
     //Importado por fuera del factoryCU
-    const CU_Cancelacion = CuFactoryCancelacion.getCU_Cancelacion()
+    const CU_Cancelacion = CuFactoryCancelacion.getCuCancelacion()
 
     //Importado por fuera del factoryCU
     const CU_ModificacionComida = CuModificacionComida.getCU_ModificacionComida()

@@ -1,11 +1,11 @@
 const {crearCUCancelacionReserva} = require('../servicios/gas/CasoUsoCancelacion')
 const factoryMailer = require('../factorys/factoryMailer')
-const { factoryFacturaCancelada } = require('../factorys/factoryPdfs')
+const { crearFacturaCancelada } = require('../factorys/factoryFacturaCancelacion')
 const {crearReservasDaoDb} = require('../Db/ReservaDb')
 const {crearGestorNotificaciones} = require('../servicios/gas/GestorNotificaciones')
 
 const mailer = factoryMailer.getMailer()
-const pdfCancelacion = factoryFacturaCancelada()
+const pdfCancelacion = crearFacturaCancelada()
 const gestorDeNotificaciones = crearGestorNotificaciones()
 
 //Cliente a base- antes de iniciar Sv. Factory devuelve cliente ya conectado
